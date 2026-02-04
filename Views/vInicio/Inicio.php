@@ -64,19 +64,19 @@
 					<div class="menu-desktop">
 						<ul class="main-menu">
 							<li>
-								<a href="../Vinicio/inicio.php">Home</a>							
+								<a href="../Vinicio/inicio.php">Inicio</a>							
 							</li>
 
 							<li>
-								<a href="product.html">Shop</a>
+								<a href="product.html">Tienda</a>
 							</li>
 					
 							<li>
-								<a href="about.html">About</a>
+								<a href="about.html">Nosotros</a>
 							</li>
 
 							<li>
-								<a href="contact.html">Contact</a>
+								<a href="contact.html">Contacto</a>
 							</li>
 						</ul>
 					</div>	
@@ -154,7 +154,7 @@
 <section class="section-slide">
 	<div class="wrap-slick1">
 		<div class="slick1">
-			<div class="item-slick1" style="background-image: url('../assets/images/slide-01.jpg');">
+			<div class="item-slick1" style="background-image: url('../assets/images/bannerLaptop1.jpg');">
 				<div class="container h-full">
 					<div class="flex-col-l-m h-full p-t-100 p-b-30">
 						<span class="ltext-202 cl2">Latest Technology</span>

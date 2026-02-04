@@ -3712,3 +3712,13 @@ iframe {border: none;}
 .pointer-none {
 	pointer-events: none;
 }
+
+.item-slick1 {
+    background-size: cover!important; 
+    background-position: center center!important;
+    background-repeat: no-repeat!important; 
+    background-attachment: fixed!important; 
+    min-height: 60vh!important;  
+    display: flex!important;
+    align-items: center!important;
+}
