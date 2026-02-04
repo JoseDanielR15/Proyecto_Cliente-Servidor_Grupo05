@@ -8,19 +8,19 @@ $assets = "/infinitytech/Views/assets/";
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="icon" type="image/png" href="<?= $assets ?>images/icons/favicon.png"/>
+	<link rel="icon" type="image/png" href="../assets/images/icons/favicon.png"/>
 
-	<link rel="stylesheet" href="<?= $assets ?>vendor/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="<?= $assets ?>fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="<?= $assets ?>fonts/iconic/css/material-design-iconic-font.min.css">
-	<link rel="stylesheet" href="<?= $assets ?>fonts/linearicons-v1.0.0/icon-font.min.css">
-	<link rel="stylesheet" href="<?= $assets ?>vendor/animate/animate.css">
-	<link rel="stylesheet" href="<?= $assets ?>vendor/css-hamburgers/hamburgers.min.css">
-	<link rel="stylesheet" href="<?= $assets ?>vendor/animsition/css/animsition.min.css">
-	<link rel="stylesheet" href="<?= $assets ?>vendor/select2/select2.min.css">
-	<link rel="stylesheet" href="<?= $assets ?>vendor/perfect-scrollbar/perfect-scrollbar.css">
-	<link rel="stylesheet" href="<?= $assets ?>css/util.css">
-	<link rel="stylesheet" href="<?= $assets ?>css/main.css">
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/fonts/iconic/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/slick/slick.css">
+	<link rel="stylesheet" type="text/css" href="../assets/css/util.css">
+	<link rel="stylesheet" type="text/css" href="../assets/css/main.css">
 </head>
 
 <body class="animsition">
@@ -42,8 +42,7 @@ $assets = "/infinitytech/Views/assets/";
 								name="email"
 								placeholder="Correo electrónico">
 							<img class="how-pos4 pointer-none"
-								src="<?= $assets ?>images/icons/icon-email.png"
-								alt="ICON">
+								src="<?= $assets ?>../images/icons/icon-email.png" alt="">							
 						</div>
 
 						<div class="bor8 m-b-30 how-pos4-parent">
@@ -59,7 +58,7 @@ $assets = "/infinitytech/Views/assets/";
 						</button>
 
 						<div class="txt-center p-t-20">
-							<a href="../VRegistro/registro.php" class="stext-107 cl2 hov-cl1">
+							<a href="../Vregistro/registro.php" class="stext-107 cl2 hov-cl1">
 								¿No tienes cuenta? Regístrate
 							</a>
 						</div>
@@ -71,11 +70,11 @@ $assets = "/infinitytech/Views/assets/";
 	</section>
 
 	<!-- SCRIPTS -->
-	<script src="<?= $assets ?>vendor/jquery/jquery-3.2.1.min.js"></script>
-	<script src="<?= $assets ?>vendor/animsition/js/animsition.min.js"></script>
-	<script src="<?= $assets ?>vendor/bootstrap/js/popper.js"></script>
-	<script src="<?= $assets ?>vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script src="<?= $assets ?>vendor/select2/select2.min.js"></script>
+	<script src="<?= $assets ?>../vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="<?= $assets ?>../vendor/animsition/js/animsition.min.js"></script>
+	<script src="<?= $assets ?>../vendor/bootstrap/js/popper.js"></script>
+	<script src="<?= $assets ?>../vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="<?= $assets ?>../vendor/select2/select2.min.js"></script>
 
 	<script>
 		$(".js-select2").each(function(){
@@ -86,7 +85,7 @@ $assets = "/infinitytech/Views/assets/";
 		});
 	</script>
 
-	<script src="<?= $assets ?>vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script src="<?= $assets ?>../vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
 	<script>
 		$('.js-pscroll').each(function(){
@@ -105,7 +104,12 @@ $assets = "/infinitytech/Views/assets/";
 		});
 	</script>
 
-	<script src="<?= $assets ?>js/main.js"></script>
+<script src="../assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="../assets/vendor/animsition/js/animsition.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/popper.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../assets/vendor/slick/slick.min.js"></script>
+<script src="../assets/js/main.js"></script>
 
 </body>
 </html>

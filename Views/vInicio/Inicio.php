@@ -23,53 +23,98 @@
 <body class="animsition">
 
 <!-- ================= HEADER ================= -->
-<header class="header-v2">
-	<div class="container-menu-desktop trans-03">
-		<div class="wrap-menu-desktop">
-			<nav class="limiter-menu-desktop p-l-45">
+<!-- Header -->
+	<header class="header-v4">
+		<!-- Header desktop -->
+		<div class="container-menu-desktop">
+			<!-- Topbar -->
+			<div class="top-bar">
+				<div class="content-topbar flex-sb-m h-full container">
+					<div class="left-top-bar">
+						InfinityTech
+					</div>
 
-				<!-- Logo -->
-				<a href="index.html" class="logo">
-					<img src="../assets/images/icons/logo-01.png" alt="InfinityTech">
-				</a>
+					<div class="right-top-bar flex-w h-full">
+						<a href="../Vsesion/sesion.php" class="flex-c-m trans-04 p-lr-25">
+							Inicio Sesion
+						</a>
 
-				<!-- Menu -->
-				<div class="menu-desktop">
-					<ul class="main-menu">
-						<li class="active-menu"><a href="index.html">Home</a></li>
-						<li><a href="product.html">Shop</a></li>
-						<li><a href="about.html">About Us</a></li>
-						<li><a href="contact.html">Contact</a></li>
-					</ul>
+						<a href="../Vregistro/registro.php" class="flex-c-m trans-04 p-lr-25">
+							Registrar
+						</a>
+
+						<a href="#" class="flex-c-m trans-04 p-lr-25">
+							Temporal
+						</a>
+
+						<a href="#" class="flex-c-m trans-04 p-lr-25">
+							Temporal
+						</a>
+					</div>
 				</div>
+			</div>
 
-				<!-- Icons -->
-				<div class="wrap-icon-header flex-w flex-r-m h-full">
-					<div class="flex-c-m h-full p-lr-19">
+			<div class="wrap-menu-desktop how-shadow1">
+				<nav class="limiter-menu-desktop container">
+					
+					<!-- Logo desktop -->							
+						<img src="../assets/images/icons/logo-01.png" alt="InfinityTech">
+					</a>
+					<!-- Menu desktop -->
+					<div class="menu-desktop">
+						<ul class="main-menu">
+							<li>
+								<a href="../Vinicio/inicio.php">Home</a>							
+							</li>
 
-						<!-- Search -->
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 js-show-modal-search">
+							<li>
+								<a href="product.html">Shop</a>
+							</li>
+					
+							<li>
+								<a href="about.html">About</a>
+							</li>
+
+							<li>
+								<a href="contact.html">Contact</a>
+							</li>
+						</ul>
+					</div>	
+
+					<!-- Icon header -->
+					<div class="wrap-icon-header flex-w flex-r-m">
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
 							<i class="zmdi zmdi-search"></i>
 						</div>
 
-						<!-- Cart -->
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart"
-							data-notify="2">
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 
-						<!-- Settings -->
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11">
-							<i class="zmdi zmdi-settings"></i>
-						</div>
-
+						<a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
+							<i class="zmdi zmdi-favorite-outline"></i>
+						</a>
 					</div>
-				</div>
-
-			</nav>
+				</nav>
+			</div>	
 		</div>
-	</div>
-</header>
+
+		<!-- Modal Search -->
+		<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
+			<div class="container-search-header">
+				<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
+					<img src="images/icons/icon-close2.png" alt="CLOSE">
+				</button>
+
+				<form class="wrap-search-header flex-w p-l-15">
+					<button class="flex-c-m trans-04">
+						<i class="zmdi zmdi-search"></i>
+					</button>
+					<input class="plh3" type="text" name="search" placeholder="Search...">
+				</form>
+			</div>
+		</div>
+	</header>
 
 <!-- ================= CART ================= -->
 <div class="wrap-header-cart js-panel-cart">
