@@ -3721,4 +3721,7 @@ iframe {border: none;}
     min-height: 60vh!important;  
     display: flex!important;
     align-items: center!important;
+	background-image: linear-gradient(rgba(0, 0, 0, 0.5),
+	rgba(0, 0, 0, 0.5));  
+	
 }

@@ -157,8 +157,8 @@
 			<div class="item-slick1" style="background-image: url('../assets/images/bannerLaptop1.jpg');">
 				<div class="container h-full">
 					<div class="flex-col-l-m h-full p-t-100 p-b-30">
-						<span class="ltext-202 cl2">Latest Technology</span>
-						<h2 class="ltext-104 cl2 p-t-19 p-b-43">New Devices</h2>
+						<span class="ltext-202 cl2" style="color: #fff;">Latest Technology</span>
+						<h2 class="ltext-104 cl2 p-t-19 p-b-43" style="color: #fff;">New Devices</h2>
 						<a href="product.html"
 							class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15">
 							Shop Now
