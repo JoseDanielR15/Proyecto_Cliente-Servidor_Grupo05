@@ -1,10 +1,7 @@
-<?php
-$assets = "/infinitytech/Views/assets/";
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Iniciar Sesión</title>
+	<title>Inicio de Sesión</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -25,90 +22,95 @@ $assets = "/infinitytech/Views/assets/";
 
 <body class="animsition">
 
-	<!-- LOGIN -->
-	<section class="bg0 p-t-104 p-b-116">
-		<div class="container">
-			<div class="flex-w flex-tr justify-content-center">
-				<div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
+<!-- ================= HEADER ================= -->
+<header class="header-v4">
+	<div class="container-menu-desktop">
+		<div class="top-bar">
+			<div class="content-topbar flex-sb-m h-full container">
+				<div class="left-top-bar">
+					InfinityTech
+				</div>
 
-					<form>
-						<h4 class="mtext-105 cl2 txt-center p-b-30">
-							Iniciar Sesión
-						</h4>
-
-						<div class="bor8 m-b-20 how-pos4-parent">
-							<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30"
-								type="email"
-								name="email"
-								placeholder="Correo electrónico">
-							<img class="how-pos4 pointer-none"
-								src="<?= $assets ?>../images/icons/icon-email.png" alt="">							
-						</div>
-
-						<div class="bor8 m-b-30 how-pos4-parent">
-							<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30"
-								type="password"
-								name="password"
-								placeholder="Contraseña">
-							
-						</div>
-
-						<button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
-							Ingresar
-						</button>
-
-						<div class="txt-center p-t-20">
-							<a href="../Vregistro/registro.php" class="stext-107 cl2 hov-cl1">
-								¿No tienes cuenta? Regístrate
-							</a>
-						</div>
-					</form>
-
+				<div class="right-top-bar flex-w h-full">
+					<a href="../Vsesion/sesion.php" class="flex-c-m trans-04 p-lr-25">
+						Inicio Sesión
+					</a>
+					<a href="../Vregistro/registro.php" class="flex-c-m trans-04 p-lr-25">
+						Registrar
+					</a>
 				</div>
 			</div>
 		</div>
-	</section>
 
-	<!-- SCRIPTS -->
-	<script src="<?= $assets ?>../vendor/jquery/jquery-3.2.1.min.js"></script>
-	<script src="<?= $assets ?>../vendor/animsition/js/animsition.min.js"></script>
-	<script src="<?= $assets ?>../vendor/bootstrap/js/popper.js"></script>
-	<script src="<?= $assets ?>../vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script src="<?= $assets ?>../vendor/select2/select2.min.js"></script>
+		<div class="wrap-menu-desktop how-shadow1">
+			<nav class="limiter-menu-desktop container">
+				<a href="../Vinicio/inicio.php" class="logo">
+					<img src="../assets/images/icons/logo-01.png" alt="InfinityTech">
+				</a>
 
-	<script>
-		$(".js-select2").each(function(){
-			$(this).select2({
-				minimumResultsForSearch: 20,
-				dropdownParent: $(this).next('.dropDownSelect2')
-			});
-		});
-	</script>
+				<div class="menu-desktop">
+					<ul class="main-menu">
+						<li><a href="../Vinicio/inicio.php">Home</a></li>
+						<li><a href="#">Shop</a></li>
+						<li><a href="#">About</a></li>
+						<li><a href="#">Contact</a></li>
+					</ul>
+				</div>						
+			</nav>
+		</div>	
+	</div>
+</header>
 
-	<script src="<?= $assets ?>../vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<!-- ================= LOGIN FORM ================= -->
+<form class="bg0 p-t-25 p-b-50">
+	<div class="container">
+		<div class="row justify-content-center align-items-center min-vh-100">
+			<div class="col-12 col-md-8 col-lg-5">
+				<div class="card border-0 shadow-none bg-transparent">
+					<div class="card-body p-0">
+						<div class="p-4 p-md-5">
+							<h3 class="mb-4">Iniciar Sesión</h3>
 
-	<script>
-		$('.js-pscroll').each(function(){
-			$(this).css('position','relative');
-			$(this).css('overflow','hidden');
+							<div class="mb-3">
+								<label class="form-label">Email</label>
+								<input class="form-control" type="email" placeholder="correo@ejemplo.com">
+							</div>
 
-			var ps = new PerfectScrollbar(this, {
-				wheelSpeed: 1,
-				scrollingThreshold: 1000,
-				wheelPropagation: false,
-			});
+							<div class="mb-3">
+								<label class="form-label">Password</label>
+								<input class="form-control" type="password" placeholder="••••••••">
+							</div>
 
-			$(window).on('resize', function(){
-				ps.update();
-			});
-		});
-	</script>
+							<button class="btn btn-primary w-100 mt-3">
+								Iniciar Sesión
+							</button>
+
+							<p class="text-center mt-3">
+								¿No tienes cuenta?
+								<a href="../Vregistro/registro.php">Regístrate aquí</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+<!-- ================= FOOTER ================= -->
+<footer class="bg3 p-t-75 p-b-32">
+	<div class="container">
+		<p class="stext-107 cl6 txt-center">
+			Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+			InfinityTech. All rights reserved.
+		</p>
+	</div>
+</footer>
 
 <script src="../assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 <script src="../assets/vendor/animsition/js/animsition.min.js"></script>
 <script src="../assets/vendor/bootstrap/js/popper.js"></script>
 <script src="../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-<script src="../assets/vendor/slick/slick.min.js"></script>
 <script src="../assets/js/main.js"></script>
 
 </body>
