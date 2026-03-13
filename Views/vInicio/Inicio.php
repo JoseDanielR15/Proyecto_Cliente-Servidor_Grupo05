@@ -9,63 +9,63 @@ include_once "../layout.php";
 
 <body class="animsition">
 
-<?php MostrarHeader(); ?>
+	<?php MostrarHeader(); ?>
 
-<!-- ================= CART ================= -->
-<div class="wrap-header-cart js-panel-cart">
-	<div class="s-full js-hide-cart"></div>
+	<!-- ================= CART ================= -->
+	<div class="wrap-header-cart js-panel-cart">
+		<div class="s-full js-hide-cart"></div>
 
-	<div class="header-cart flex-col-l p-l-65 p-r-25">
-		<div class="header-cart-title flex-w flex-sb-m p-b-8">
-			<span class="mtext-103 cl2">Your Cart</span>
-			<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
-				<i class="zmdi zmdi-close"></i>
+		<div class="header-cart flex-col-l p-l-65 p-r-25">
+			<div class="header-cart-title flex-w flex-sb-m p-b-8">
+				<span class="mtext-103 cl2">Your Cart</span>
+				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+					<i class="zmdi zmdi-close"></i>
+				</div>
+			</div>
+
+			<div class="header-cart-content">
+				<p class="stext-102">Your cart is currently empty.</p>
 			</div>
 		</div>
+	</div>
 
-		<div class="header-cart-content">
-			<p class="stext-102">Your cart is currently empty.</p>
+	<!-- ================= SEARCH MODAL ================= -->
+	<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
+		<div class="container-search-header">
+			<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
+				<i class="zmdi zmdi-close"></i>
+			</button>
+
+			<form class="wrap-search-header flex-w">
+				<button class="flex-c-m trans-04">
+					<i class="zmdi zmdi-search"></i>
+				</button>
+				<input class="plh3" type="text" placeholder="Search products...">
+			</form>
 		</div>
 	</div>
-</div>
 
-<!-- ================= SEARCH MODAL ================= -->
-<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
-	<div class="container-search-header">
-		<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
-			<i class="zmdi zmdi-close"></i>
-		</button>
-
-		<form class="wrap-search-header flex-w">
-			<button class="flex-c-m trans-04">
-				<i class="zmdi zmdi-search"></i>
-			</button>
-			<input class="plh3" type="text" placeholder="Search products...">
-		</form>
-	</div>
-</div>
-
-<!-- ================= SLIDER ================= -->
-<section class="section-slide">
-	<div class="wrap-slick1">
-		<div class="slick1">
-			<div class="item-slick1" style="background-image: url('../assets/images/bannerLaptop1.jpg');">
-				<div class="container h-full">
-					<div class="flex-col-l-m h-full p-t-100 p-b-30">
-						<span class="ltext-202 cl2" style="color: #fff;">Latest Technology</span>
-						<h2 class="ltext-104 cl2 p-t-19 p-b-43" style="color: #fff;">New Devices</h2>
-						<a href="product.html"
-							class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15">
-							Shop Now
-						</a>
+	<!-- ================= SLIDER ================= -->
+	<section class="section-slide">
+		<div class="wrap-slick1">
+			<div class="slick1">
+				<div class="item-slick1" style="background-image: url('../assets/images/bannerLaptop1.jpg');">
+					<div class="container h-full">
+						<div class="flex-col-l-m h-full p-t-100 p-b-30">
+							<span class="ltext-202 cl2" style="color: #fff;">Latest Technology</span>
+							<h2 class="ltext-104 cl2 p-t-19 p-b-43" style="color: #fff;">New Devices</h2>
+							<a href="product.html"
+								class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15">
+								Shop Now
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</section>
+	</section>
 
-<div class="sec-banner bg0 p-t-80 p-b-50">
+	<div class="sec-banner bg0 p-t-80 p-b-50">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
@@ -80,7 +80,7 @@ include_once "../layout.php";
 								</span>
 
 								<span class="block1-info stext-102 trans-04">
-									
+
 								</span>
 							</div>
 
@@ -105,7 +105,7 @@ include_once "../layout.php";
 								</span>
 
 								<span class="block1-info stext-102 trans-04">
-									
+
 								</span>
 							</div>
 
@@ -130,7 +130,7 @@ include_once "../layout.php";
 								</span>
 
 								<span class="block1-info stext-102 trans-04">
-								
+
 								</span>
 							</div>
 
@@ -145,23 +145,5 @@ include_once "../layout.php";
 			</div>
 		</div>
 	</div>
-<!-- ================= FOOTER ================= -->
-<footer class="bg3 p-t-75 p-b-32">
-	<div class="container">
-		<p class="stext-107 cl6 txt-center">
-			© 2026 InfinityTech. All rights reserved.
-		</p>
-	</div>
-</footer>
 
-<!-- ================= JS ================= -->
-<script src="../assets/vendor/jquery/jquery-3.2.1.min.js"></script>
-<script src="../assets/vendor/animsition/js/animsition.min.js"></script>
-<script src="../assets/vendor/bootstrap/js/popper.js"></script>
-<script src="../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-<script src="../assets/vendor/slick/slick.min.js"></script>
-<script src="../assets/js/main.js"></script>
-
-</body>
-</html>
-
+	<?php MostrarFooter(); ?>

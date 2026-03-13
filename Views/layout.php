@@ -1,16 +1,49 @@
 <?php
 
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+	session_start();
 }
 
-
+// ==================== FUNCIÓN PARA MOSTRAR HEAD (META TAGS Y FAVICON) ====================
 function MostrarHead()
 {
-echo '
+	echo '
+<head>
+<title>InfinityTech</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="../assets/images/icons/favicon.png"/>
+';
+	MostrarCSS();
+	echo '
+</head>
+';
+}
 
+// ==================== FUNCIÓN PARA MOSTRAR CSS ====================
+function MostrarCSS()
+{
+	echo '
+<link rel="stylesheet" type="text/css" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="../assets/fonts/iconic/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" type="text/css" href="../assets/vendor/animate/animate.css">
+<link rel="stylesheet" type="text/css" href="../assets/vendor/css-hamburgers/hamburgers.min.css">
+<link rel="stylesheet" type="text/css" href="../assets/vendor/animsition/css/animsition.min.css">
+<link rel="stylesheet" type="text/css" href="../assets/vendor/select2/select2.min.css">
+<link rel="stylesheet" type="text/css" href="../assets/vendor/daterangepicker/daterangepicker.css">
+<link rel="stylesheet" type="text/css" href="../assets/vendor/slick/slick.css">
+<link rel="stylesheet" href="/Proyecto_Cliente-Servidor_Grupo05/assets/css/auth.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/util.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/main.css">
+';
+}
+
+// ==================== FUNCIÓN PARA MOSTRAR HEADER (NAVBAR) ====================
+function MostrarHeader()
+{
+	echo '
 <header class="header-v4">
-
 	<!-- Header desktop -->
 	<div class="container-menu-desktop">
 
@@ -87,90 +120,42 @@ echo '
 	</div>
 
 </header>
-
 ';
 }
 
-function MostrarHeader()
-{
-echo '
-
-<head>
-<title>InfinityTech</title>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<link rel="icon" type="image/png" href="../assets/images/icons/favicon.png"/>
-
-<link rel="stylesheet" type="text/css" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="../assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="../assets/fonts/iconic/css/material-design-iconic-font.min.css">
-<link rel="stylesheet" type="text/css" href="../assets/vendor/animate/animate.css">
-<link rel="stylesheet" type="text/css" href="../assets/vendor/css-hamburgers/hamburgers.min.css">
-<link rel="stylesheet" type="text/css" href="../assets/vendor/animsition/css/animsition.min.css">
-<link rel="stylesheet" type="text/css" href="../assets/vendor/select2/select2.min.css">
-<link rel="stylesheet" type="text/css" href="../assets/vendor/daterangepicker/daterangepicker.css">
-<link rel="stylesheet" type="text/css" href="../assets/vendor/slick/slick.css">
-<link rel="stylesheet" href="/Proyecto_Cliente-Servidor_Grupo05/assets/css/auth.css">
-
-<link rel="stylesheet" type="text/css" href="../assets/css/util.css">
-<link rel="stylesheet" type="text/css" href="../assets/css/main.css">
-
-</head>
-
-<body class="animsition">
-
-';
-}
-
+// ==================== FUNCIÓN PARA MOSTRAR FOOTER Y SCRIPTS ====================
 function MostrarFooter()
 {
-echo '
-
+	echo '
 <!-- ================= FOOTER ================= -->
-
 <footer class="bg3 p-t-75 p-b-32">
-
-<div class="container">
-
-<p class="stext-107 cl6 txt-center">
-
-Copyright &copy;
-<script>document.write(new Date().getFullYear());</script>
-
-InfinityTech. All rights reserved.
-
-</p>
-
-</div>
-
+	<div class="container">
+		<p class="stext-107 cl6 txt-center">
+			Copyright &copy;
+			<script>document.write(new Date().getFullYear());</script>
+			InfinityTech. All rights reserved.
+		</p>
+	</div>
 </footer>
+';
+	MostrarJS();
+}
 
-
+// ==================== FUNCIÓN PARA MOSTRAR JAVASCRIPT ====================
+function MostrarJS()
+{
+	echo '
 <!-- ================= JS ================= -->
-
 <script src="../assets/vendor/jquery/jquery-3.2.1.min.js"></script>
-
 <script src="../assets/vendor/animsition/js/animsition.min.js"></script>
-
 <script src="../assets/vendor/bootstrap/js/popper.js"></script>
-
 <script src="../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-
 <script src="../assets/vendor/select2/select2.min.js"></script>
-
 <script src="../assets/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
-
 <script src="../assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-
 <script src="../assets/vendor/slick/slick.min.js"></script>
-
 <script src="../assets/js/main.js"></script>
-
 </body>
 </html>
-
 ';
 }
-?>
