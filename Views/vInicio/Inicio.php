@@ -1,13 +1,16 @@
 <?php
-include_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Views/layout.php";
+include_once "../layout.php";
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
-<?php
-	MostrarHeader();
-?>
+<?php MostrarHead(); ?>
+
+<body class="animsition">
+
+<?php MostrarHeader(); ?>
+
 <!-- ================= CART ================= -->
 <div class="wrap-header-cart js-panel-cart">
 	<div class="s-full js-hide-cart"></div>
