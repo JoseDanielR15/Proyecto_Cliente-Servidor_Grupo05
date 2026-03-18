@@ -1,6 +1,5 @@
 <?php
 include_once "../layout.php";
-include_once "../../Controllers/HomeController.php";
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +25,7 @@ include_once "../../Controllers/HomeController.php";
                         Iniciar Sesión
                     </h5>
 
-                    <form action="../../Controllers/HomeController.php" method="POST" novalidate>
+                    <form action="../../Controllers/cAutenticacion.php" method="POST" novalidate>
 
                         <div class="form-group">
                             <label for="correo">Correo Electrónico</label>
@@ -38,7 +37,7 @@ include_once "../../Controllers/HomeController.php";
                             <input type="password" class="form-control" id="password" name="password" placeholder="Tu contraseña" required>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" name="btnIniciarSesion" class="btn btn-primary">
                             <i class="fa fa-sign-in mr-2"></i>Iniciar Sesión
                         </button>
 

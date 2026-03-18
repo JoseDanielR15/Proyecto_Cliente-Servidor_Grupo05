@@ -1,6 +1,6 @@
 <?php
 include_once "../layout.php";
-include_once "../../Controllers/HomeController.php";
+include_once "../../Controllers/cAutenticacion.php";
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +26,7 @@ include_once "../../Controllers/HomeController.php";
                         Crear Cuenta
                     </h5>
 
-                    <form action="../../Controllers/HomeController.php" method="POST" novalidate>
+                    <form action="../../Controllers/cAutenticacion.php" method="POST" novalidate>
 
                         <div class="form-group">
                             <label for="nombre">Nombre Completo</label>
