@@ -27,8 +27,8 @@ function MostrarCSS()
 {
     echo '
 <link rel="stylesheet" type="text/css" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="../assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="../assets/fonts/iconic/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/material-design-iconic-font.min.css">
 <link rel="stylesheet" type="text/css" href="../assets/vendor/animate/animate.css">
 <link rel="stylesheet" type="text/css" href="../assets/vendor/css-hamburgers/hamburgers.min.css">
 <link rel="stylesheet" type="text/css" href="../assets/vendor/animsition/css/animsition.min.css">
