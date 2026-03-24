@@ -1,21 +1,23 @@
 <?php
 
 if (session_status() === PHP_SESSION_NONE) {
-	session_start();
+    session_start();
 }
 
 // ==================== FUNCIÓN PARA MOSTRAR HEAD (META TAGS Y FAVICON) ====================
 function MostrarHead()
 {
-	echo '
+
+
+    echo '
 <head>
 <title>InfinityTech</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/png" href="../assets/images/icons/favicon.png"/>
 ';
-	MostrarCSS();
-	echo '
+    MostrarCSS();
+    echo '
 </head>
 ';
 }
@@ -23,7 +25,7 @@ function MostrarHead()
 // ==================== FUNCIÓN PARA MOSTRAR CSS ====================
 function MostrarCSS()
 {
-	echo '
+    echo '
 <link rel="stylesheet" type="text/css" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="../assets/fonts/iconic/css/material-design-iconic-font.min.css">
@@ -42,82 +44,100 @@ function MostrarCSS()
 // ==================== FUNCIÓN PARA MOSTRAR HEADER (NAVBAR) ====================
 function MostrarHeader()
 {
-	echo '
+    // Verificar si hay sesión activa
+    $nombreUsuario = "";
+    $haySession = isset($_SESSION["NombreUsuario"]);
+    if ($haySession) {
+        $nombreUsuario = $_SESSION["NombreUsuario"];
+    }
+
+    echo '
 <header class="header-v4">
-	<!-- Header desktop -->
-	<div class="container-menu-desktop">
+    <!-- Header desktop -->
+    <div class="container-menu-desktop">
 
-		<!-- Topbar -->
-		<div class="top-bar">
-			<div class="content-topbar flex-sb-m h-full container">
+        <!-- Topbar -->
+        <div class="top-bar">
+            <div class="content-topbar flex-sb-m h-full container">
 
-				<div class="left-top-bar">
-					InfinityTech - Tecnología para todos
-				</div>
+                <div class="left-top-bar">
+                    InfinityTech - Tecnología para todos
+                </div>
 
-				<div class="right-top-bar flex-w h-full">
+                <div class="right-top-bar flex-w h-full">';
 
-					<a href="../vSesion/sesion.php" class="flex-c-m trans-04 p-lr-25">
-						Iniciar Sesión
-					</a>
 
-					<a href="../vRegistro/registro.php" class="flex-c-m trans-04 p-lr-25">
-						Registrarse
-					</a>
+    if ($haySession) {
+        echo '
+                    <span class="flex-c-m trans-04 p-lr-25">
+                        Bienvenido, ' . htmlspecialchars($nombreUsuario) . '
+                    </span>
+                    <a href="../vSesion/logout.php" class="flex-c-m trans-04 p-lr-25">
+                        Cerrar Sesión
+                    </a>';
+    } else {
+        echo '
+                    <a href="../vSesion/sesion.php" class="flex-c-m trans-04 p-lr-25">
+                        Iniciar Sesión
+                    </a>
+                    <a href="../vRegistro/registro.php" class="flex-c-m trans-04 p-lr-25">
+                        Registrarse
+                    </a>';
+    }
 
-				</div>
+    echo '
+                </div>
+            </div>
+        </div>
 
-			</div>
-		</div>
+        <div class="wrap-menu-desktop">
+            <nav class="limiter-menu-desktop container">
 
-		<div class="wrap-menu-desktop">
-			<nav class="limiter-menu-desktop container">
+                <!-- Logo -->
+                <a href="../vInicio/Inicio.php" class="logo">
+                    <img src="../assets/images/icons/logo-01.png" alt="IMG-LOGO">
+                </a>
 
-				<!-- Logo -->
-				<a href="../vInicio/Inicio.php" class="logo">
-					<img src="../assets/images/icons/logo-01.png" alt="IMG-LOGO">
-				</a>
+                <!-- Menu -->
+                <div class="menu-desktop">
+                    <ul class="main-menu">
 
-				<!-- Menu -->
-				<div class="menu-desktop">
-					<ul class="main-menu">
+                        <li class="active-menu">
+                            <a href="../vInicio/Inicio.php">Inicio</a>
+                        </li>
 
-						<li class="active-menu">
-							<a href="../vInicio/Inicio.php">Inicio</a>
-						</li>
+                        <li>
+                            <a href="product.html">Productos</a>
+                        </li>
 
-						<li>
-							<a href="product.html">Productos</a>
-						</li>
+                        <li>
+                            <a href="about.html">Acerca de</a>
+                        </li>
 
-						<li>
-							<a href="about.html">Acerca de</a>
-						</li>
+                        <li>
+                            <a href="contact.html">Contacto</a>
+                        </li>
 
-						<li>
-							<a href="contact.html">Contacto</a>
-						</li>
+                    </ul>
+                </div>
 
-					</ul>
-				</div>
+                <!-- Iconos -->
+                <div class="wrap-icon-header flex-w flex-r-m">
 
-				<!-- Iconos -->
-				<div class="wrap-icon-header flex-w flex-r-m">
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+                        <i class="zmdi zmdi-search"></i>
+                    </div>
 
-					<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
-						<i class="zmdi zmdi-search"></i>
-					</div>
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart">
+                        <i class="zmdi zmdi-shopping-cart"></i>
+                    </div>
 
-					<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart">
-						<i class="zmdi zmdi-shopping-cart"></i>
-					</div>
+                </div>
 
-				</div>
+            </nav>
+        </div>
 
-			</nav>
-		</div>
-
-	</div>
+    </div>
 
 </header>
 ';
@@ -126,7 +146,7 @@ function MostrarHeader()
 // ==================== FUNCIÓN PARA MOSTRAR FOOTER Y SCRIPTS ====================
 function MostrarFooter()
 {
-	echo '
+    echo '
 <!-- ================= FOOTER ================= -->
 <footer class="bg3 p-t-75 p-b-32">
 	<div class="container">
@@ -138,13 +158,13 @@ function MostrarFooter()
 	</div>
 </footer>
 ';
-	MostrarJS();
+    MostrarJS();
 }
 
 // ==================== FUNCIÓN PARA MOSTRAR JAVASCRIPT ====================
 function MostrarJS()
 {
-	echo '
+    echo '
 <!-- ================= JS ================= -->
 <script src="../assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 <script src="../assets/vendor/animsition/js/animsition.min.js"></script>

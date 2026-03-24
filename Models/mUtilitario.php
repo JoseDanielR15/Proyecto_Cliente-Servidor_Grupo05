@@ -3,7 +3,7 @@
 function OpenDatabase()
 {
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-    return mysqli_connect("127.0.0.1:3307", "root", "", "mn_db");
+    return mysqli_connect("127.0.0.1:3306", "root", "", "tiendacomputo");
 }
 
 function CloseDatabase($context)
