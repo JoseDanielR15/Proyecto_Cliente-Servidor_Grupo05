@@ -7,11 +7,10 @@ function RegistrarModel($identificacion, $nombre, $contrasenna, $correoElectronc
         $context = OpenDatabase();
         $sp = "CALL sp_Registrar('$identificacion', '$nombre', '$contrasenna', '$correoElectroncio')";
         $result = $context->query($sp);
-
         CloseDatabase($context);
         return $result;
     } catch (Exception $e) {
-        return false;
+        return $e->getMessage();
     }
 }
 

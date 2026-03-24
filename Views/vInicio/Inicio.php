@@ -54,8 +54,7 @@ include_once "../layout.php";
 						<div class="flex-col-l-m h-full p-t-100 p-b-30">
 							<span class="ltext-202 cl2" style="color: #fff;">Latest Technology</span>
 							<h2 class="ltext-104 cl2 p-t-19 p-b-43" style="color: #fff;">New Devices</h2>
-							<a href="product.html"
-								class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15">
+							<a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15">
 								Shop Now
 							</a>
 						</div>
@@ -73,7 +72,8 @@ include_once "../layout.php";
 					<div class="block1 wrap-pic-w">
 						<img src='../assets/images/Monitores.jpg' alt="IMG-BANNER">
 
-						<a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+						<a href="product.html"
+							class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 							<div class="block1-txt-child1 flex-col-l">
 								<span class="block1-name ltext-102 trans-04 p-b-8">
 									Monitores
@@ -98,7 +98,8 @@ include_once "../layout.php";
 					<div class="block1 wrap-pic-w" style='width: 88%;'>
 						<img src='../assets/images/Ofertas.jpg' alt="IMG-BANNER">
 
-						<a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+						<a href="product.html"
+							class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 							<div class="block1-txt-child1 flex-col-l">
 								<span class="block1-name ltext-102 trans-04 p-b-8">
 
@@ -123,7 +124,8 @@ include_once "../layout.php";
 					<div class="block1 wrap-pic-w">
 						<img src='../assets/images/Mouse.jpg' alt="IMG-BANNER">
 
-						<a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+						<a href="product.html"
+							class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 							<div class="block1-txt-child1 flex-col-l">
 								<span class="block1-name ltext-102 trans-04 p-b-8">
 									Perifericos
