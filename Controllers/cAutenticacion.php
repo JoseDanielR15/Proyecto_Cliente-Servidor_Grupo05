@@ -1,4 +1,8 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 include_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Models/mAutenticacion.php";
 
 if (isset($_POST["btnIniciarSesion"])) {
@@ -12,7 +16,7 @@ if (isset($_POST["btnIniciarSesion"])) {
         $_SESSION["NombreUsuario"] = $result["Nombre"];
         $_SESSION["Consecutivo"] = $result["Consecutivo"];
         $_SESSION["CorreoElectronico"] = $result["CorreoElectronico"];
-        header("Location: ../../Views/vHome/inicio.php");
+        header("Location: ../Views/vInicio/Inicio.php");
         exit;
     } else {
         $_POST["Mensaje"] = "Su información no fue autenticada correctamente";
@@ -28,7 +32,7 @@ if (isset($_POST["btnRegistrar"])) {
     $result = RegistrarModel($identificacion, $nombre, $contrasenna, $correoElectronico);
 
     if ($result) {
-        header("Location: ../../Views/vHome/login.php");
+        header("Location: ../../Views/vSesion/sesion.php");
         exit;
     } else {
         $_POST["Mensaje"] = "Su información no fue registrada correctamente";
