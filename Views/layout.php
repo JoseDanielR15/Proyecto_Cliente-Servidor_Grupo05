@@ -175,6 +175,7 @@ function MostrarJS()
 <script src="../assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script src="../assets/vendor/slick/slick.min.js"></script>
 <script src="../assets/js/main.js"></script>
+<script src="../assets/js/banner.js"></script>
 </body>
 </html>
 ';

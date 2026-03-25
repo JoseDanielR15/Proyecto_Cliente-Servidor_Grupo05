@@ -3,7 +3,7 @@ include_once "../layout.php";
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <?php MostrarHead(); ?>
 
@@ -11,8 +11,11 @@ include_once "../layout.php";
 
 <?php MostrarHeader(); ?>
 
-	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('../assets/images/bg-01.jpg');">
-        <h2 class="ltext-105 cl0 txt-center">
+    <section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('../assets/images/bg-01.jpg'); position: relative; overflow: hidden; min-height: 200px;">
+        
+        <canvas id="networkCanvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></canvas>
+
+        <h2 class="ltext-105 cl0 txt-center" style="position: relative; z-index: 2; pointer-events: none;">
             Mantenimiento de Técnicos
         </h2>
     </section>  
@@ -37,7 +40,6 @@ include_once "../layout.php";
                         <th class="column-4">Teléfono</th>
                         <th class="column-5">Acciones</th>
                     </tr>
-
                     <tr class="table_row">
                         <td class="column-1 p-l-30">001</td>
                         <td class="column-2">Juan Pérez</td>
@@ -57,15 +59,9 @@ include_once "../layout.php";
                 </table>
             </div>
         </div>
-    </section>	
+    </section>
 
 
-
-<!-- Back to top -->
-	<div class="btn-back-to-top" id="myBtn">
-		<span class="symbol-btn-back-to-top">
-			<i class="zmdi zmdi-chevron-up"></i>
-		</span>
-	</div>
-
-	<?php MostrarFooter(); ?>
+    <?php MostrarFooter(); ?>
+</body>
+</html>

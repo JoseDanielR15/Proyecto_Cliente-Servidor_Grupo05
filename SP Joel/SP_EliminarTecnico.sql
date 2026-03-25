@@ -1,0 +1,6 @@
+DELIMITER //
+CREATE PROCEDURE SP_EliminarTecnico(IN p_id_tecnico INT)
+BEGIN
+    DELETE FROM TBL_TECNICOS WHERE ID_TECNICO = p_id_tecnico;
+END //
+DELIMITER ;
