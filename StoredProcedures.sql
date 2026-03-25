@@ -48,6 +48,17 @@ BEGIN
       );
 END$$
 
+DROP PROCEDURE IF EXISTS sp_ActualizarContrasenna$$
+CREATE PROCEDURE sp_ActualizarContrasenna(
+    IN pNuevaContrasenna VARCHAR(255),
+    IN pConsecutivo INT
+)
+BEGIN
+    UPDATE TBL_USUARIOS
+    SET PASSWORD = pNuevaContrasenna
+    WHERE ID_USUARIO = pConsecutivo;
+END$$
+
 -- ============================================================
 -- DATOS INICIALES REQUERIDOS
 -- ============================================================

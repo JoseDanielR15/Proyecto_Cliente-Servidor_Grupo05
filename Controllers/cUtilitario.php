@@ -1,5 +1,5 @@
 <?php
-//Ejemplo, pero es para agregar otras utilidades
+
 function GenerarContrasenna()
 {
     $letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -12,4 +12,36 @@ function GenerarContrasenna()
     }
 
     return $contrasena;
+}
+
+function EnviarCorreo($asunto, $contenido, $destinatario)
+{
+    require 'PHPMailer/src/PHPMailer.php';
+    require 'PHPMailer/src/SMTP.php';
+
+    $correoSalida = ""
+    $contrasennaSalida = ".";
+
+    if($contrasennaSalida == "")
+    {
+        return true; // Simulación de envío exitoso
+    }
+
+    $mail = new PHPMailer();
+    $mail->CharSet = 'UTF-8';
+
+    $mail->IsSMTP();
+    $mail->IsHTML(true);
+    $mail->Host = 'smtp.office365.com';
+    $mail->SMTPSecure = 'tls';
+    $mail->Port = 587;
+    $mail->SMTPAuth = true;
+    $mail->Username = $correoSalida;
+    $mail->Password = $contrasennaSalida;
+
+    $mail->SetFrom($correoSalida);
+    $mail->Subject = $asunto;
+    $mail->MsgHTML($contenido);
+    $mail->AddAddress($destinatario);
+    $mail->send();
 }

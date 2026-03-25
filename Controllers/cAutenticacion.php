@@ -40,3 +40,27 @@ if (isset($_POST["btnRegistrar"])) {
         exit;
     }
 }
+
+if (isset($_POST["btnRecuperarAcceso"])) {
+    $correoElectronico = $_POST["CorreoElectronico"];
+    $token = RecuperarAccesoModel($correoElectronico);
+    if ($token) {
+        // In a real app, send email with link
+        // For demo, redirect to reset page with token
+        header("Location: ../Views/vSesion/resetContrasenna.php?token=" . $token);
+        exit;
+    } else {
+        $_SESSION["Mensaje"] = "Correo electrónico no encontrado.";
+        header("Location: ../Views/vSesion/recuperarAcceso.php");
+        exit;
+    }
+}
+
+if (isset($_POST["btnResetContrasenna"])) {
+    $token = $_POST["token"];
+    $nuevaContrasenna = $_POST["nuevaContrasenna"];
+    $result = ResetContrasennaModel($token, $nuevaContrasenna);
+    $_SESSION["Mensaje"] = $result;
+    header("Location: ../Views/vSesion/sesion.php");
+    exit;
+}
