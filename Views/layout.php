@@ -95,7 +95,7 @@ function MostrarHeader()
 
                 <!-- Logo -->
                 <a href="../vInicio/Inicio.php" class="logo">
-                    <img src="../assets/images/icons/logo-01.png" alt="IMG-LOGO">
+                    <img src="../assets/images/icons/logoInfinityTech-01.png" alt="IMG-LOGO">
                 </a>
 
                 <!-- Menu -->

@@ -13,11 +13,14 @@ include_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Mod
         <div class="container d-flex align-items-flex-start justify-content-center"
             style="min-height: auto; padding-top: 30px;">
             <div class="col-lg-5 col-md-6 col-sm-8 col-10">
+
                 <div class="auth-logo">
-                    <img src="https://i.fbcd.co/products/resized/resized-750-500/e53c5e6b6b694566ebf50ee9e7d5f4f23381e1a7ee5170287d5a88f29e9f78f3.jpg"
-                        class="img-fluid" alt="InfinityTech"
+                    <img src="../assets/images/logoInfinityTech.png"
+                        alt="InfinityTech"
+                        class="img-fluid"
                         style="width: 100%; height: auto; display: block; margin-bottom: 20px;">
                 </div>
+
                 <div class="login-card">
                     <form action="../../Controllers/cAutenticacion.php" method="POST" id="formRecuperarAcceso" novalidate>
                         <div class="form-group">

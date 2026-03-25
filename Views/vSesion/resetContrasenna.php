@@ -13,11 +13,14 @@ include_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Mod
         <div class="container d-flex align-items-flex-start justify-content-center"
             style="min-height: auto; padding-top: 30px;">
             <div class="col-lg-5 col-md-6 col-sm-8 col-10">
+
                 <div class="auth-logo">
-                    <img src="https://i.fbcd.co/products/resized/resized-750-500/e53c5e6b6b694566ebf50ee9e7d5f4f23381e1a7ee5170287d5a88f29e9f78f3.jpg"
-                        class="img-fluid" alt="InfinityTech"
+                    <img src="../assets/images/logoInfinityTech.png"
+                        alt="InfinityTech"
+                        class="img-fluid"
                         style="width: 100%; height: auto; display: block; margin-bottom: 20px;">
                 </div>
+
                 <div class="login-card">
                     <form action="../../Controllers/cAutenticacion.php" method="POST" id="formResetContrasenna" novalidate>
                         <input type="hidden" name="token" value="<?php echo htmlspecialchars($_GET['token'] ?? ''); ?>">
@@ -41,7 +44,7 @@ include_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Mod
                         <?php endif; ?>
                         <div class="text-center">
                             <button type="submit" name="btnResetContrasenna" class="btn btn-primary">
-                              <i class="fa fa-key mr-2"></i>Actualizar Contraseña
+                                <i class="fa fa-key mr-2"></i>Actualizar Contraseña
                             </button>
                         </div>
                         <div class="text-center auth-links">

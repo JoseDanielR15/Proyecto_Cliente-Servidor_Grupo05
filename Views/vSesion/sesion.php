@@ -12,11 +12,16 @@ include_once "../layout.php";
         <div class="container d-flex align-items-flex-start justify-content-center"
             style="min-height: auto; padding-top: 30px;">
             <div class="col-lg-5 col-md-6 col-sm-8 col-10">
+
                 <div class="auth-logo">
-                    <img src="https://i.fbcd.co/products/resized/resized-750-500/e53c5e6b6b694566ebf50ee9e7d5f4f23381e1a7ee5170287d5a88f29e9f78f3.jpg"
-                        class="img-fluid" alt="InfinityTech"
+                    <img src="../assets/images/logoInfinityTech.png"
+                        alt="InfinityTech"
+                        class="img-fluid"
                         style="width: 100%; height: auto; display: block; margin-bottom: 20px;">
                 </div>
+
+
+
                 <div class="login-card">
                     <form action="../../Controllers/cAutenticacion.php" method="POST" id="formLogin" novalidate>
                         <div class="form-group">
@@ -24,7 +29,7 @@ include_once "../layout.php";
                             <input type="email" class="form-control" id="correo" name="correo"
                                 placeholder="tu@email.com" required>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="password">Contraseña</label>
                             <input type="password" class="form-control" id="password" name="password"
@@ -40,7 +45,7 @@ include_once "../layout.php";
                         <?php endif; ?>
                         <div class="text-center">
                             <button type="submit" name="btnIniciarSesion" class="btn btn-primary">
-                              <i class="fa fa-sign-in mr-2"></i>Iniciar Sesión
+                                <i class="fa fa-sign-in mr-2"></i>Iniciar Sesión
                             </button>
                         </div>
                         <div class="text-center auth-links">
@@ -63,7 +68,7 @@ include_once "../layout.php";
                                     </a>
                                 </div>
                             </div>
-                        </div>              
+                        </div>
                     </form>
                 </div>
             </div>
