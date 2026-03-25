@@ -1,5 +1,6 @@
 <?php
 include_once "../layout.php";
+include_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Controllers/TecnicosController.php";
 ?>
 
 <!DOCTYPE html>
@@ -26,41 +27,90 @@ include_once "../layout.php";
                 <h4 class="mtext-105 cl2">
                     Lista de Técnicos Registrados
                 </h4>
-                <a href="fomulario_tecnico.php" class="flex-c-m stext-101 cl0 size-101 bg3 bor1 hov-btn3 p-lr-15 trans-04">
+                <button type="button" class="flex-c-m stext-101 cl0 size-101 bg3 bor1 hov-btn3 p-lr-15 trans-04"
+                data-toggle="modal" data-target="#modalTecnico">
                     <i class="zmdi zmdi-plus m-r-5"></i> Agregar Técnico
-                </a>
+                </button>
             </div>
 
-            <div class="wrap-table-shopping-cart" style="border: 1px solid #e6e6e6;">
-                <table class="table-shopping-cart">
-                    <tr class="table_head">
-                        <th class="column-1 p-l-30">ID</th>
-                        <th class="column-2">Nombre Completo</th>
-                        <th class="column-3">Especialidad</th>
-                        <th class="column-4">Teléfono</th>
-                        <th class="column-5">Acciones</th>
-                    </tr>
-                    <tr class="table_row">
-                        <td class="column-1 p-l-30">001</td>
-                        <td class="column-2">Juan Pérez</td>
-                        <td class="column-3">Soporte Redes</td>
-                        <td class="column-4">+506 8888-8888</td>
-                        <td class="column-5">
-                            <div class="flex-w">
-                                <a href="editar_tecnico.php?id=001" class="btn-sm btn-info m-r-10" title="Editar">
-                                    <i class="zmdi zmdi-edit cl2 hov-cl1"></i>
-                                </a>
-                                <a href="#" class="btn-sm btn-danger" title="Eliminar" onclick="return confirm('¿Seguro que desea eliminar este técnico?')">
-                                    <i class="zmdi zmdi-delete cl2 hov-cl1"></i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+        <div class="wrap-table-shopping-cart" style="border: 1px solid #e6e6e6;">
+            <table class="table-shopping-cart">
+                <tr class="table_head">
+                    <th class="column-1 p-l-30">ID</th>
+                    <th class="column-2">Nombre Completo</th>
+                    <th class="column-3">Especialidad</th>
+                    <th class="column-4">Teléfono</th>
+                    <th class="column-5" style="width: 25%;!important">Email</th>
+                    <th class="column-6" style="width: 25%;!important">Acciones</th>
+                </tr>
+
+                <?php
+                $listaTecnicos = ConsultarTecnicos();
+                if(isset($listaTecnicos) && count($listaTecnicos) > 0) {
+                        foreach ($listaTecnicos as $tecnico) {
+                            echo '<tr class="table_row">';
+                            echo '    <td class="column-1 p-l-30">' . $tecnico["ID_TECNICO"] . '</td>';
+                            echo '    <td class="column-2">' . $tecnico["NOMBRE"] . '</td>';
+                            echo '    <td class="column-3">' . $tecnico["ESPECIALIDAD"] . '</td>';
+                            echo '    <td class="column-4">' . $tecnico["TELEFONO"] . '</td>';
+                            echo '    <td class="column-5" style="width: 25%;!important">' . $tecnico["EMAIL"] . '</td>';
+                            echo '    <td class="column-6" style="width: 25%;!important">
+                                        <div class="flex-w">
+                                            <a href="editar_tecnico.php?id='.$tecnico["ID_TECNICO"].'" class="btn-sm btn-info m-r-10"><i class="zmdi zmdi-edit"></i></a>
+                                            <a href="eliminar_tecnico.php?id='.$tecnico["ID_TECNICO"].'" class="btn-sm btn-danger" onclick="return confirm(\'¿Seguro?\')"><i class="zmdi zmdi-delete"></i></a>
+                                        </div>
+                                      </td>';
+                            echo '</tr>';
+                        }
+                    } else {
+                        echo '<tr><td colspan="6" class="text-center p-t-20">No hay técnicos registrados.</td></tr>';
+                    }
+                    ?>
+            </table>
+
         </div>
     </section>
 
+    
+<!-- Modal para agregar los tecnioss -->
+
+    <div class="modal fade" id="modalTecnico" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="p-t-40 p-b-40 p-lr-40">
+                    <h4 class="mtext-105 cl2 txt-center p-b-30">Registrar Nuevo Técnico</h4>
+                    
+                    <form method="POST">
+                        <input type="hidden" name="btnInsertarTecnico">
+
+                        <div class="bor8 m-b-20 how-pos4-parent">
+                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="nombre" placeholder="Nombre Completo" required>
+                            <i class="how-pos4 zmdi zmdi-account"></i>
+                        </div>
+
+                        <div class="bor8 m-b-20 how-pos4-parent">
+                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="email" name="email" placeholder="Correo Electrónico" required>
+                            <i class="how-pos4 zmdi zmdi-email"></i>
+                        </div>
+
+                        <div class="bor8 m-b-20 how-pos4-parent">
+                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="telefono" placeholder="Número de Teléfono" required>
+                            <i class="how-pos4 zmdi zmdi-phone"></i>
+                        </div>
+
+                        <div class="bor8 m-b-30 how-pos4-parent">
+                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="especialidad" placeholder="Especialidad (ej. Redes, Laptops)" required>
+                            <i class="how-pos4 zmdi zmdi-wrench"></i>
+                        </div>
+
+                        <button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04">
+                            Guardar Técnico
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <?php MostrarFooter(); ?>
 </body>
