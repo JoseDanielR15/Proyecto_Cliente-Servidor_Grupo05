@@ -19,7 +19,7 @@ include_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Mod
                         style="width: 100%; height: auto; display: block; margin-bottom: 20px;">
                 </div>
                 <div class="login-card">
-                    <form action="../../Controllers/cAutenticacion.php" method="POST" novalidate>
+                    <form action="../../Controllers/cAutenticacion.php" method="POST" id="formRecuperarAcceso" novalidate>
                         <div class="form-group">
                             <label for="CorreoElectronico">Correo Electrónico</label>
                             <input type="email" class="form-control" id="CorreoElectronico" name="CorreoElectronico"

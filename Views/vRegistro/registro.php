@@ -20,49 +20,55 @@ include_once "../../Controllers/cAutenticacion.php";
                         style="width: 100%; height: auto; display: block; margin-bottom: 20px;">
                 </div>
 
-                    <form action="../../Controllers/cAutenticacion.php" method="POST" novalidate>
+                <form action="../../Controllers/cAutenticacion.php" method="POST" id="formRegistro" novalidate>
+                    <div class="form-group">
+                        <label for="Identificacion">Identificación</label>
+                        <input type="text" class="form-control" id="Identificacion" name="Identificacion"
+                            onkeyup="ConsultarNombre();" placeholder="Tu número de identificación" required>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="Identificacion">Identificación</label>
-                            <input type="text" class="form-control" id="Identificacion" name="Identificacion"
-                                placeholder="Tu número de identificación" required>
-                        </div>
+                    <div class="form-group">
+                        <label for="Nombre">Nombre Completo</label>
+                        <input type="text" id="Nombre" name="Nombre" class="form-control" readonly
+                            placeholder="Tu nombre">
+                    </div>
 
-                        <div class="form-group">
-                            <label for="Nombre">Nombre Completo</label>
-                            <input type="text" class="form-control" id="Nombre" name="Nombre" placeholder="Tu nombre"
-                                required>
-                        </div>
+                    <div class="form-group">
+                        <label for="CorreoElectronico">Correo Electrónico</label>
+                        <input type="email" class="form-control" id="CorreoElectronico" name="CorreoElectronico"
+                            placeholder="tu@email.com" required>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="CorreoElectronico">Correo Electrónico</label>
-                            <input type="email" class="form-control" id="CorreoElectronico" name="CorreoElectronico"
-                                placeholder="tu@email.com" required>
-                        </div>
+                    <div class="form-group">
+                        <label for="Contrasenna">Contraseña</label>
+                        <input type="password" class="form-control" id="Contrasenna" name="Contrasenna"
+                            placeholder="Crea una contraseña segura" required>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="Contrasenna">Contraseña</label>
-                            <input type="password" class="form-control" id="Contrasenna" name="Contrasenna"
-                                placeholder="Crea una contraseña segura" required>
-                        </div>
+                    <button type="submit" name="btnRegistrar" class="btn btn-success">
+                        Crear Cuenta
+                    </button>
+                </form>
 
-                        <?php if (!empty($_SESSION["Mensaje"])): ?>
-                            <div class="alert alert-danger" role="alert" style="margin-top: 15px; margin-bottom: 15px;">
-                                <?php
-                                echo htmlspecialchars($_SESSION["Mensaje"]);
-                                unset($_SESSION["Mensaje"]);
-                                ?>
-                            </div>
-                        <?php endif; ?>
+                <!-- Enlace al script -->
+                <script src="../assets/funciones/registro.js"></script>
 
-                        <button type="submit" name="btnRegistrar" class="btn btn-success" style="margin-top: 10px;">
-                            <i class="fa fa-user-plus mr-2"></i>Crear Cuenta
-                        </button>
 
-                    </form>
-                </div>
+
+                <?php if (!empty($_SESSION["Mensaje"])): ?>
+                    <div class="alert alert-danger" role="alert" style="margin-top: 15px; margin-bottom: 15px;">
+                        <?php
+                        echo htmlspecialchars($_SESSION["Mensaje"]);
+                        unset($_SESSION["Mensaje"]);
+                        ?>
+                    </div>
+                <?php endif; ?>
+
+
+                </form>
             </div>
         </div>
+    </div>
     </div>
 
     <?php MostrarFooter(); ?>

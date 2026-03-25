@@ -46,23 +46,39 @@ include_once "../layout.php";
 	</div>
 
 	<!-- ================= SLIDER ================= -->
-	<section class="section-slide">
-		<div class="wrap-slick1">
-			<div class="slick1">
-				<div class="item-slick1" style="background-image: url('../assets/images/bannerLaptop1.jpg');">
-					<div class="container h-full">
-						<div class="flex-col-l-m h-full p-t-100 p-b-30">
-							<span class="ltext-202 cl2" style="color: #fff;">Latest Technology</span>
-							<h2 class="ltext-104 cl2 p-t-19 p-b-43" style="color: #fff;">New Devices</h2>
-							<a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15">
-								Shop Now
-							</a>
-						</div>
-					</div>
+	<div class="container d-flex justify-content-center my-4">
+		<div id="carouselExampleIndicators" class="carousel slide w-75" data-bs-ride="carousel">
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+			</div>
+			<div class="carousel-inner">
+				<div class="carousel-item active" data-bs-interval="3000">
+					<img src="../assets/images/bannerControl.jpg" class="d-block w-100" alt="IMG-BANNER">
+				</div>
+				<div class="carousel-item" data-bs-interval="3000">
+					<img src="../assets/images/bannerJuegos.jpg" class="d-block w-100" alt="Laptop Banner">
+				</div>
+				<div class="carousel-item" data-bs-interval="3000">
+					<img src="../assets/images/bannerLaptop3.jpg" class="d-block w-100" alt="Accesorios Banner">
 				</div>
 			</div>
+			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
 		</div>
-	</section>
+	</div>
+
+	<!-- Bootstrap JS -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
 
 	<div class="sec-banner bg0 p-t-80 p-b-50">
 		<div class="container">

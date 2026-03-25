@@ -167,6 +167,7 @@ function MostrarJS()
     echo '
 <!-- ================= JS ================= -->
 <script src="../assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 <script src="../assets/vendor/animsition/js/animsition.min.js"></script>
 <script src="../assets/vendor/bootstrap/js/popper.js"></script>
 <script src="../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -177,6 +178,7 @@ function MostrarJS()
 <script src="../assets/js/main.js"></script>
 <script src="../assets/js/banner.js"></script>
 <script src="../assets/js/editarDatos.js"></script>
+<script src="../assets/funciones/validaciones.js"></script>
 </body>
 </html>
 ';

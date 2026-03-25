@@ -19,12 +19,17 @@ include_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Mod
                         style="width: 100%; height: auto; display: block; margin-bottom: 20px;">
                 </div>
                 <div class="login-card">
-                    <form action="../../Controllers/cAutenticacion.php" method="POST" novalidate>
+                    <form action="../../Controllers/cAutenticacion.php" method="POST" id="formResetContrasenna" novalidate>
                         <input type="hidden" name="token" value="<?php echo htmlspecialchars($_GET['token'] ?? ''); ?>">
                         <div class="form-group">
                             <label for="nuevaContrasenna">Nueva Contraseña</label>
                             <input type="password" class="form-control" id="nuevaContrasenna" name="nuevaContrasenna"
                                 placeholder="Ingresa tu nueva contraseña" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmarContrasenna">Confirmar Contraseña</label>
+                            <input type="password" class="form-control" id="confirmarContrasenna" name="confirmarContrasenna"
+                                placeholder="Confirma tu contraseña" required>
                         </div>
                         <?php if (!empty($_SESSION["Mensaje"])): ?>
                             <div class="alert alert-danger" role="alert" style="margin-top: 15px; margin-bottom: 15px;">

@@ -18,12 +18,13 @@ include_once "../layout.php";
                         style="width: 100%; height: auto; display: block; margin-bottom: 20px;">
                 </div>
                 <div class="login-card">
-                    <form action="../../Controllers/cAutenticacion.php" method="POST" novalidate>
+                    <form action="../../Controllers/cAutenticacion.php" method="POST" id="formLogin" novalidate>
                         <div class="form-group">
                             <label for="correo">Correo Electrónico</label>
                             <input type="email" class="form-control" id="correo" name="correo"
                                 placeholder="tu@email.com" required>
                         </div>
+                        
                         <div class="form-group">
                             <label for="password">Contraseña</label>
                             <input type="password" class="form-control" id="password" name="password"
