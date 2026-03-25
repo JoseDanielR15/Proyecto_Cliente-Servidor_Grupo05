@@ -28,4 +28,25 @@ function InsertarTecnicoModel($nombre, $email, $telefono, $especialidad, $id_est
     CloseDatabase($context);
     return $result;
 }
+
+function ActualizarTecnicoModel($id, $nombre, $email, $telefono, $especialidad, $id_estado)
+{
+    $context = OpenDatabase();
+    $sp = "CALL SP_ActualizarTecnico($id, '$nombre', '$email', '$telefono', '$especialidad', $id_estado)";
+    $result = $context->query($sp);
+    CloseDatabase($context);
+    return $result;
+}
+
+function EliminarTecnicoModel($id)
+{
+    $context = OpenDatabase();
+    
+    $sp = "CALL SP_EliminarTecnico($id)";
+    $result = $context->query($sp);
+    
+    CloseDatabase($context);
+    return $result;
+}
+
 ?>

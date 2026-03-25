@@ -55,11 +55,25 @@ include_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Con
                             echo '    <td class="column-4">' . $tecnico["TELEFONO"] . '</td>';
                             echo '    <td class="column-5" style="width: 25%;!important">' . $tecnico["EMAIL"] . '</td>';
                             echo '    <td class="column-6" style="width: 25%;!important">
-                                        <div class="flex-w">
-                                            <a href="editar_tecnico.php?id='.$tecnico["ID_TECNICO"].'" class="btn-sm btn-info m-r-10"><i class="zmdi zmdi-edit"></i></a>
-                                            <a href="eliminar_tecnico.php?id='.$tecnico["ID_TECNICO"].'" class="btn-sm btn-danger" onclick="return confirm(\'¿Seguro?\')"><i class="zmdi zmdi-delete"></i></a>
-                                        </div>
-                                      </td>';
+                                            <div class="flex-w">
+                                                <a href="#" class="btn-sm btn-info m-r-10" 
+                                                data-toggle="modal" 
+                                                data-target="#modalEditarTecnico"
+                                                data-id="' . $tecnico["ID_TECNICO"] . '"
+                                                data-nombre="' . $tecnico["NOMBRE"] . '"
+                                                data-email="' . $tecnico["EMAIL"] . '"
+                                                data-telefono="' . $tecnico["TELEFONO"] . '"
+                                                data-especialidad="' . $tecnico["ESPECIALIDAD"] . '">
+                                                <i class="zmdi zmdi-edit"></i>
+                                                </a>
+
+                                                <a href="adminTecnicos.php?EliminarTecnico=true&id=' . $tecnico["ID_TECNICO"] . '" 
+                                                    class="btn-sm btn-danger" 
+                                                    onclick="return confirm(\'¿Está seguro de que desea inactivar a este técnico? Podrá reactivarlo luego desde la base de datos.\');">
+                                                    <i class="zmdi zmdi-power"></i> 
+                                                </a>
+                                            </div>
+                                        </td>';
                             echo '</tr>';
                         }
                     } else {
@@ -105,6 +119,47 @@ include_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Con
 
                         <button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04">
                             Guardar Técnico
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Editar Tecnicos -->
+
+    <div class="modal fade" id="modalEditarTecnico" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="p-t-40 p-b-40 p-lr-40">
+                    <h4 class="mtext-105 cl2 txt-center p-b-30">Actualizar Datos del Técnico</h4>
+                    
+                    <form method="POST">
+                        <input type="hidden" name="btnActualizarTecnico">
+                        <input type="hidden" id="edit_id" name="id_tecnico">
+
+                        <div class="bor8 m-b-20 how-pos4-parent">
+                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" id="edit_nombre" name="nombre" placeholder="Nombre Completo" required>
+                            <i class="how-pos4 zmdi zmdi-account"></i>
+                        </div>
+
+                        <div class="bor8 m-b-20 how-pos4-parent">
+                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="email" id="edit_email" name="email" placeholder="Correo Electrónico" required>
+                            <i class="how-pos4 zmdi zmdi-email"></i>
+                        </div>
+
+                        <div class="bor8 m-b-20 how-pos4-parent">
+                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" id="edit_telefono" name="telefono" placeholder="Número de Teléfono" required>
+                            <i class="how-pos4 zmdi zmdi-phone"></i>
+                        </div>
+
+                        <div class="bor8 m-b-30 how-pos4-parent">
+                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" id="edit_especialidad" name="especialidad" placeholder="Especialidad" required>
+                            <i class="how-pos4 zmdi zmdi-wrench"></i>
+                        </div>
+
+                        <button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04">
+                            Actualizar Técnico
                         </button>
                     </form>
                 </div>
