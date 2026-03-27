@@ -1,6 +1,3 @@
-// ========================================
-// VALIDACIONES PARA REGISTRO
-// ========================================
 $(function () {
     $("#formRegistro").validate({
         rules: {

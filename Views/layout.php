@@ -72,7 +72,7 @@ function MostrarHeader()
                     <span class="flex-c-m trans-04 p-lr-25">
                         Bienvenido, ' . htmlspecialchars($nombreUsuario) . '
                     </span>
-                    <a href="../vSesion/logout.php" class="flex-c-m trans-04 p-lr-25">
+                    <a href="#0" onclick="CerrarSesion()" class="flex-c-m trans-04 p-lr-25">
                         Cerrar Sesión
                     </a>';
     } else {
@@ -107,7 +107,7 @@ function MostrarHeader()
                         </li>
 
                         <li>
-                            <a href="product.html">Productos</a>
+                            <a href="../vProductos/consultarProductos.php">Productos</a>
                         </li>
 
                         <li>
@@ -178,7 +178,15 @@ function MostrarJS()
 <script src="../assets/js/main.js"></script>
 <script src="../assets/js/banner.js"></script>
 <script src="../assets/js/editarDatos.js"></script>
-<script src="../assets/funciones/validaciones.js"></script>
+
+<!-- ================= VALIDACIONES ================= -->
+<script src="../assets/funciones/login.js"></script>
+<script src="../assets/funciones/registro.js"></script>
+<script src="../assets/funciones/recuperar.js"></script>
+<script src="../assets/funciones/reset.js"></script>
+<script src="../assets/funciones/sesion.js"></script>
+<script src="../assets/funciones/productos.js"></script>
+<script src="../assets/funciones/validacionesProductos.js"></script>
 </body>
 </html>
 ';
