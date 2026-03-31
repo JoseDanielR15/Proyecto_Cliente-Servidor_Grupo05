@@ -23,6 +23,7 @@ include_once "../../Controllers/cAutenticacion.php";
                 </div>
 
                 <form action="../../Controllers/cAutenticacion.php" method="POST" id="formRegistro" novalidate>
+
                     <div class="form-group">
                         <label for="Identificacion">Identificación</label>
                         <input type="text" class="form-control" id="Identificacion" name="Identificacion"
@@ -47,16 +48,24 @@ include_once "../../Controllers/cAutenticacion.php";
                             placeholder="Crea una contraseña segura" required>
                     </div>
 
-                    <button type="submit" name="btnRegistrar" class="btn btn-success">
+                    <button type="submit" name="btnRegistrar" class="btn btn-success" style="width: 100%; margin-top: 10px;">
                         Crear Cuenta
                     </button>
+
+                    <!-- BOTÓN VOLVER AL LOGIN -->
+                    <div class="text-center auth-links" style="margin-top: 15px;">
+                        <a href="../vSesion/sesion.php" class="btn btn-outline-secondary btn-sm mb-2"
+                            style="width: 100%;">
+                            <i class="fa fa-arrow-left mr-1"></i> Volver al inicio de sesión
+                        </a>
+                    </div>
+
                 </form>
 
-                <!-- Enlace al script -->
+                <!-- Script -->
                 <script src="../assets/funciones/registro.js"></script>
 
-
-
+                <!-- MENSAJE DE ERROR -->
                 <?php if (!empty($_SESSION["Mensaje"])): ?>
                     <div class="alert alert-danger" role="alert" style="margin-top: 15px; margin-bottom: 15px;">
                         <?php
@@ -66,14 +75,13 @@ include_once "../../Controllers/cAutenticacion.php";
                     </div>
                 <?php endif; ?>
 
-
-                </form>
             </div>
         </div>
     </div>
-    </div>
 
     <?php MostrarFooter(); ?>
+
+    <?php MostrarJS(); ?>
 
     <style>
         .auth-links {
@@ -95,3 +103,7 @@ include_once "../../Controllers/cAutenticacion.php";
             margin-top: auto;
         }
     </style>
+
+</body>
+
+</html>

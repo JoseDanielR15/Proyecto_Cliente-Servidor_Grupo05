@@ -111,11 +111,11 @@ function MostrarHeader()
                         </li>
 
                         <li>
-                            <a href="about.html">Acerca de</a>
+                            <a href="../vInicio/acercaDe.php">Acerca de</a>
                         </li>
 
                         <li>
-                            <a href="contact.html">Contacto</a>
+                            <a href="../vInicio/contacto.php">Contacto</a>
                         </li>
 
                     </ul>
