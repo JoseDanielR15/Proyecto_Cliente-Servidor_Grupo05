@@ -24,13 +24,13 @@ function ConsultarProductosModel()
 }
 
 // ================= INSERTAR =================
-function InsertarProductoModel($nombre, $precio, $cantidad)
+function InsertarProductoModel($nombre, $descripcion, $precio, $cantidad, $imagen)
 {
     try {
         $context = OpenDatabase();
 
-        $query = "INSERT INTO productos (Nombre, Precio, Cantidad) 
-                  VALUES ('$nombre', '$precio', '$cantidad')";
+        $query = "INSERT INTO tbl_productos (NOMBRE, DESCRIPCION, PRECIO, CANTIDAD, IMAGEN) 
+                  VALUES ('$nombre', '$descripcion', '$precio', '$cantidad', '$imagen')";
 
         $result = $context->query($query);
 

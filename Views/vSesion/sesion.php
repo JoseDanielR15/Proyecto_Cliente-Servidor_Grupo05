@@ -25,9 +25,15 @@ include_once "../layout.php";
                 <div class="login-card">
                     <form action="../../Controllers/cAutenticacion.php" method="POST" id="formLogin" novalidate>
                         <div class="form-group">
-                            <label for="correo">Correo Electrónico</label>
-                            <input type="email" class="form-control" id="correo" name="correo"
-                                placeholder="tu@email.com" required>
+                            <label for="Identificacion">Identificación</label>
+                            <input type="text" class="form-control" id="Identificacion" name="Identificacion"
+                                onkeyup="ConsultarNombre();" placeholder="Tu número de identificación" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Nombre">Nombre Completo</label>
+                            <input type="text" id="Nombre" name="Nombre" class="form-control" readonly
+                                placeholder="Tu nombre">
                         </div>
 
                         <div class="form-group">
@@ -43,6 +49,11 @@ include_once "../layout.php";
                                 ?>
                             </div>
                         <?php endif; ?>
+                        <?php if (isset($_GET["mensaje"]) && $_GET["mensaje"] === "cambio"): ?>
+                            <div class="alert alert-success" role="alert" style="margin-top: 15px; margin-bottom: 15px;">
+                                La contraseña se actualizó correctamente. Por favor, inicie sesión nuevamente.
+                            </div>
+                        <?php endif; ?>
                         <div class="text-center">
                             <button type="submit" name="btnIniciarSesion" class="btn btn-primary">
                                 <i class="fa fa-sign-in mr-2"></i>Iniciar Sesión
@@ -53,11 +64,6 @@ include_once "../layout.php";
                             <a href="../vRegistro/registro.php" class="btn btn-outline-secondary btn-sm mb-2"
                                 style="width: 100%;">
                                 <i class="fa fa-user-plus mr-1"></i>Regístrate aquí
-                            </a>
-                            <p class="mt-4 mb-3">¿Quieres saltarte este paso?</p>
-                            <a href="../vInicio/Inicio.php" class="btn btn-success btn-lg"
-                                style="width: 100%; font-weight: 700; padding: 12px 20px;">
-                                <i class="fa fa-arrow-right mr-2"></i>Ir al Inicio
                             </a>
                         </div>
                         <div class="title text-center">
@@ -75,6 +81,28 @@ include_once "../layout.php";
         </div>
     </div>
     <?php MostrarFooter(); ?>
+    <script>
+        function ConsultarNombre() {
+            document.getElementById("Nombre").value = "";
+            let identificacion = document.getElementById("Identificacion").value;
+
+            if (identificacion.length >= 9) {
+                $.ajax({
+                    url: "https://apis.gometa.org/cedulas/" + identificacion,
+                    method: "GET",
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.resultcount > 0) {
+                            document.getElementById("Nombre").value = response.nombre;
+                        }
+                    },
+                    error: function () {
+                        alert("Hubo un problema al consultar la información.");
+                    }
+                });
+            }
+        }
+    </script>
     <style>
         .auth-links {
             padding-bottom: 70px;

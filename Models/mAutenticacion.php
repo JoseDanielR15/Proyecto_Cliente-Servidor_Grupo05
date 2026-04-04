@@ -5,7 +5,7 @@ function RegistrarModel($identificacion, $nombre, $contrasenna, $correoElectronc
 {
     try {
         $context = OpenDatabase();
-        $sp = "CALL sp_Registrar('$identificacion', '$nombre', '$contrasenna', '$correoElectroncio')";
+        $sp = "CALL SP_CREAR_USUARIO('$identificacion', '$nombre', '$correoElectroncio', '$contrasenna')";
         $result = $context->query($sp);
         CloseDatabase($context);
         return $result;
@@ -14,12 +14,12 @@ function RegistrarModel($identificacion, $nombre, $contrasenna, $correoElectronc
     }
 }
 
-function IniciarSesionModel($correoElectronico, $contrasenna)
+function IniciarSesionModel($identificacion, $contrasenna)
 {
     try {
         $context = OpenDatabase();
 
-        $sp = "CALL sp_IniciarSesion('$correoElectronico', '$contrasenna')";
+        $sp = "CALL SP_LOGIN('$identificacion', '$contrasenna')";
         $result = $context->query($sp);
 
         $datos = null;
@@ -39,8 +39,8 @@ function ValidarCorreoModel($correoElectronico)
     try {
         $context = OpenDatabase();
 
-        $sp = "CALL sp_ValidarCorreo('$correoElectronico')";
-        $result = $context->query($sp);
+        $query = "SELECT ID_USUARIO AS Consecutivo, NOMBRE AS Nombre, EMAIL AS CorreoElectronico FROM TBL_USUARIOS WHERE EMAIL = '$correoElectronico'";
+        $result = $context->query($query);
 
         $datos = null;
         while ($fila = $result->fetch_assoc()) {
@@ -118,8 +118,8 @@ function ActualizarContrasennaModel($nuevaContrasenna, $consecutivo)
     try {
         $context = OpenDatabase();
 
-        $sp = "CALL sp_ActualizarContrasenna('$nuevaContrasenna', '$consecutivo')";
-        $result = $context->query($sp);
+        $query = "UPDATE TBL_USUARIOS SET PASSWORD = '$nuevaContrasenna' WHERE ID_USUARIO = '$consecutivo'";
+        $result = $context->query($query);
 
         CloseDatabase($context);
         return $result;

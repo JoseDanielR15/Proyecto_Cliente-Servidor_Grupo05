@@ -1,8 +1,0 @@
-DELIMITER //
-CREATE PROCEDURE SP_EliminarTecnico(IN p_id_tecnico INT)
-BEGIN
-    UPDATE TBL_TECNICOS 
-    SET ID_ESTADO = 2 
-    WHERE ID_TECNICO = p_id_tecnico;
-END //
-DELIMITER ;

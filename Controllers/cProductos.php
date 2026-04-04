@@ -6,9 +6,9 @@ function ConsultarProductosController()
     return ConsultarProductosModel();
 }
 
-function InsertarProductoController($nombre, $precio, $cantidad)
+function InsertarProductoController($nombre, $descripcion, $precio, $cantidad, $imagen)
 {
-    return InsertarProductoModel($nombre, $precio, $cantidad);
+    return InsertarProductoModel($nombre, $descripcion, $precio, $cantidad, $imagen);
 }
 
 function ObtenerProductoController($idProducto)

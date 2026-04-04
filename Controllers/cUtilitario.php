@@ -19,7 +19,7 @@ function EnviarCorreo($asunto, $contenido, $destinatario)
     require 'PHPMailer/src/PHPMailer.php';
     require 'PHPMailer/src/SMTP.php';
 
-    $correoSalida = ""
+    $correoSalida = "";
     $contrasennaSalida = "";
 
     if($contrasennaSalida == "")

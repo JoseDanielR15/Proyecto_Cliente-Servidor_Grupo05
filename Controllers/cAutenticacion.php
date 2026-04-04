@@ -5,9 +5,9 @@ if (session_status() === PHP_SESSION_NONE) {
 include_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Models/mAutenticacion.php";
 
 if (isset($_POST["btnIniciarSesion"])) {
-    $correoElectronico = $_POST["correo"];
-    $contrasenna = $_POST["password"];
-    $result = IniciarSesionModel($correoElectronico, $contrasenna);
+    $identificacion = $_POST["Identificacion"];
+    $contrasenna = $_POST["Contrasenna"];
+    $result = IniciarSesionModel($identificacion, $contrasenna);
     if ($result) {
         $_SESSION["NombreUsuario"] = $result["Nombre"];
         $_SESSION["Consecutivo"] = $result["Consecutivo"];

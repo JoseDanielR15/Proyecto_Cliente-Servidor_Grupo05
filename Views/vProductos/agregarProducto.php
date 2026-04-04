@@ -5,10 +5,22 @@ include_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Con
 if (isset($_POST["btnRegistrar"])) {
 
     $nombre = $_POST["Nombre"];
+    $descripcion = $_POST["Descripcion"];
     $precio = $_POST["Precio"];
     $cantidad = $_POST["Cantidad"];
 
-    $resultado = InsertarProductoController($nombre, $precio, $cantidad);
+    $imagenPath = null;
+    if (isset($_FILES["Imagen"]) && $_FILES["Imagen"]["error"] == 0) {
+        $targetDir = "../assets/images/productos/";
+        if (!is_dir($targetDir)) mkdir($targetDir, 0755, true);
+        $fileName = uniqid() . "_" . basename($_FILES["Imagen"]["name"]);
+        $targetFile = $targetDir . $fileName;
+        if (move_uploaded_file($_FILES["Imagen"]["tmp_name"], $targetFile)) {
+            $imagenPath = "Views/assets/images/productos/" . $fileName;
+        }
+    }
+
+    $resultado = InsertarProductoController($nombre, $descripcion, $precio, $cantidad, $imagenPath);
 
     if ($resultado) {
         header("Location: consultarProductos.php?mensaje=registrado");
@@ -35,11 +47,16 @@ if (isset($_POST["btnRegistrar"])) {
         <div class="alert alert-danger"><?= $mensaje ?></div>
     <?php } ?>
 
-    <form method="POST" id="formProducto">
+    <form method="POST" id="formProducto" enctype="multipart/form-data">
 
         <div class="mb-3">
             <label>Nombre</label>
             <input type="text" id="Nombre" name="Nombre" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label>Descripción</label>
+            <textarea id="Descripcion" name="Descripcion" class="form-control" rows="3"></textarea>
         </div>
 
         <div class="mb-3">
@@ -50,6 +67,11 @@ if (isset($_POST["btnRegistrar"])) {
         <div class="mb-3">
             <label>Cantidad</label>
             <input type="number" id="Cantidad" name="Cantidad" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label>Imagen</label>
+            <input type="file" id="Imagen" name="Imagen" class="form-control" accept="image/*">
         </div>
 
         <button type="submit" name="btnRegistrar" class="btn btn-primary">

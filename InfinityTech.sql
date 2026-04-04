@@ -52,7 +52,7 @@ DROP TABLE IF EXISTS `tbl_categorias`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_categorias` (
   `ID_CATEGORIA` int(11) NOT NULL AUTO_INCREMENT,
-  `NOMBRE_CATEGORIA` varchar(100) NOT NULL,
+  `NOMBRE_CATEGORIA` varchar(100) DEFAULT NULL,
   `ID_ESTADO` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_CATEGORIA`),
   KEY `ID_ESTADO` (`ID_ESTADO`),
@@ -246,7 +246,7 @@ CREATE TABLE `tbl_item_carrito` (
   `ID_ITEM` int(11) NOT NULL AUTO_INCREMENT,
   `ID_CARRITO` int(11) DEFAULT NULL,
   `ID_PRODUCTO` int(11) DEFAULT NULL,
-  `CANTIDAD` int(11) NOT NULL CHECK (`CANTIDAD` > 0),
+  `CANTIDAD` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_ITEM`),
   KEY `ID_CARRITO` (`ID_CARRITO`),
   KEY `ID_PRODUCTO` (`ID_PRODUCTO`),
@@ -273,7 +273,7 @@ DROP TABLE IF EXISTS `tbl_marcas`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_marcas` (
   `ID_MARCA` int(11) NOT NULL AUTO_INCREMENT,
-  `NOMBRE_MARCA` varchar(100) NOT NULL,
+  `NOMBRE_MARCA` varchar(100) DEFAULT NULL,
   `ID_ESTADO` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_MARCA`),
   KEY `ID_ESTADO` (`ID_ESTADO`),
@@ -301,12 +301,12 @@ CREATE TABLE `tbl_productos` (
   `ID_PRODUCTO` int(11) NOT NULL AUTO_INCREMENT,
   `ID_MARCA` int(11) DEFAULT NULL,
   `ID_CATEGORIA` int(11) DEFAULT NULL,
-  `NOMBRE` varchar(150) NOT NULL,
+  `NOMBRE` varchar(150) DEFAULT NULL,
   `DESCRIPCION` text DEFAULT NULL,
-  `PRECIO` decimal(10,2) NOT NULL CHECK (`PRECIO` > 0),
-  `CANTIDAD` int(11) NOT NULL CHECK (`CANTIDAD` >= 0),
+  `PRECIO` decimal(10,2) DEFAULT NULL,
+  `CANTIDAD` int(11) DEFAULT NULL,
+  `IMAGEN` varchar(255) DEFAULT NULL,
   `ID_ESTADO` int(11) DEFAULT NULL,
-  `FECHA_REGISTRO` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`ID_PRODUCTO`),
   KEY `ID_MARCA` (`ID_MARCA`),
   KEY `ID_CATEGORIA` (`ID_CATEGORIA`),
@@ -335,9 +335,9 @@ DROP TABLE IF EXISTS `tbl_reset_contrasenna`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_reset_contrasenna` (
   `ID_RESET` int(11) NOT NULL AUTO_INCREMENT,
-  `EMAIL` varchar(100) NOT NULL,
-  `TOKEN` varchar(255) NOT NULL,
-  `EXPIRES_AT` datetime NOT NULL,
+  `EMAIL` varchar(100) DEFAULT NULL,
+  `TOKEN` varchar(255) DEFAULT NULL,
+  `EXPIRES_AT` datetime DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`ID_RESET`),
   UNIQUE KEY `TOKEN` (`TOKEN`),
@@ -364,6 +364,7 @@ DROP TABLE IF EXISTS `tbl_usuarios`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_usuarios` (
   `ID_USUARIO` int(11) NOT NULL AUTO_INCREMENT,
+  `IDENTIFICACION` varchar(20) DEFAULT NULL,
   `NOMBRE` varchar(100) NOT NULL,
   `EMAIL` varchar(100) NOT NULL,
   `PASSWORD` varchar(255) NOT NULL,
@@ -372,6 +373,7 @@ CREATE TABLE `tbl_usuarios` (
   `FECHA_REGISTRO` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`ID_USUARIO`),
   UNIQUE KEY `EMAIL` (`EMAIL`),
+  UNIQUE KEY `IDENTIFICACION` (`IDENTIFICACION`),
   KEY `ID_ESTADO_USUARIO` (`ID_ESTADO_USUARIO`),
   CONSTRAINT `tbl_usuarios_ibfk_1` FOREIGN KEY (`ID_ESTADO_USUARIO`) REFERENCES `tbl_estados_usuarios` (`ID_ESTADO_USUARIO`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -389,110 +391,6 @@ UNLOCK TABLES;
 --
 -- Dumping routines for database 'infinitytech'
 --
-/*!50003 DROP PROCEDURE IF EXISTS `SP_ACTUALIZAR_PRODUCTO` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_ACTUALIZAR_PRODUCTO`(
-    IN p_id INT,
-    IN p_nombre VARCHAR(150),
-    IN p_precio DECIMAL(10,2),
-    IN p_cantidad INT
-)
-BEGIN
-    UPDATE TBL_PRODUCTOS
-    SET NOMBRE = p_nombre,
-        PRECIO = p_precio,
-        CANTIDAD = p_cantidad
-    WHERE ID_PRODUCTO = p_id;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `SP_ACTUALIZAR_USUARIO` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_ACTUALIZAR_USUARIO`(
-    IN p_id INT,
-    IN p_nombre VARCHAR(100),
-    IN p_email VARCHAR(100)
-)
-BEGIN
-    UPDATE TBL_USUARIOS
-    SET NOMBRE = p_nombre,
-        EMAIL = p_email
-    WHERE ID_USUARIO = p_id;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `SP_AGREGAR_DETALLE_FACT` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_AGREGAR_DETALLE_FACT`(
-    IN p_factura INT,
-    IN p_producto INT,
-    IN p_cantidad INT,
-    IN p_precio DECIMAL(10,2)
-)
-BEGIN
-    INSERT INTO TBL_DETALLE_FACT
-    (ID_FACTURA, ID_PRODUCTO, CANTIDAD, PRECIO_UNITARIO_MOMENTO)
-    VALUES (p_factura, p_producto, p_cantidad, p_precio);
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `SP_AGREGAR_ITEM_CARRITO` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_AGREGAR_ITEM_CARRITO`(
-    IN p_carrito INT,
-    IN p_producto INT,
-    IN p_cantidad INT
-)
-BEGIN
-    INSERT INTO TBL_ITEM_CARRITO (ID_CARRITO, ID_PRODUCTO, CANTIDAD)
-    VALUES (p_carrito, p_producto, p_cantidad);
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `SP_CREAR_CARRITO` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -505,31 +403,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_CREAR_CARRITO`(IN p_usuario INT)
 BEGIN
-    INSERT INTO TBL_CARRITO (ID_USUARIO) VALUES (p_usuario);
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `SP_CREAR_FACTURA` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_CREAR_FACTURA`(
-    IN p_usuario INT,
-    IN p_direccion INT,
-    IN p_total DECIMAL(10,2)
-)
-BEGIN
-    INSERT INTO TBL_FACTURAS (ID_USUARIO, ID_DIRECCION, TOTAL, ID_ESTADO_VENTA)
-    VALUES (p_usuario, p_direccion, p_total, 1);
+    INSERT INTO TBL_CARRITO(ID_USUARIO) VALUES(p_usuario);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -556,9 +430,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_CREAR_PRODUCTO`(
 )
 BEGIN
     INSERT INTO TBL_PRODUCTOS
-    (NOMBRE, DESCRIPCION, PRECIO, CANTIDAD, ID_MARCA, ID_CATEGORIA, ID_ESTADO)
-    VALUES
-    (p_nombre, p_descripcion, p_precio, p_cantidad, p_marca, p_categoria, 1);
+    (NOMBRE,DESCRIPCION,PRECIO,CANTIDAD,ID_MARCA,ID_CATEGORIA,ID_ESTADO)
+    VALUES (p_nombre,p_descripcion,p_precio,p_cantidad,p_marca,p_categoria,1);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -576,55 +449,14 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_CREAR_USUARIO`(
+    IN p_identificacion VARCHAR(20),
     IN p_nombre VARCHAR(100),
     IN p_email VARCHAR(100),
     IN p_password VARCHAR(255)
 )
 BEGIN
-    INSERT INTO TBL_USUARIOS (NOMBRE, EMAIL, PASSWORD, ID_ESTADO_USUARIO)
-    VALUES (p_nombre, p_email, p_password, 1);
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `SP_ELIMINAR_PRODUCTO` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_ELIMINAR_PRODUCTO`(IN p_id INT)
-BEGIN
-    UPDATE TBL_PRODUCTOS
-    SET ID_ESTADO = 2
-    WHERE ID_PRODUCTO = p_id;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `SP_ELIMINAR_USUARIO` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_ELIMINAR_USUARIO`(IN p_id INT)
-BEGIN
-    UPDATE TBL_USUARIOS
-    SET ID_ESTADO_USUARIO = 2
-    WHERE ID_USUARIO = p_id;
+    INSERT INTO TBL_USUARIOS (IDENTIFICACION,NOMBRE,EMAIL,PASSWORD,ID_ESTADO_USUARIO)
+    VALUES (p_identificacion,p_nombre,p_email,p_password,1);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -646,11 +478,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_LOGIN`(
     IN p_password VARCHAR(255)
 )
 BEGIN
-    SELECT *
-    FROM TBL_USUARIOS
-    WHERE EMAIL = p_email
-      AND PASSWORD = p_password
-      AND ID_ESTADO_USUARIO = 1;
+    SELECT * FROM TBL_USUARIOS
+    WHERE EMAIL=p_email AND PASSWORD=p_password AND ID_ESTADO_USUARIO=1;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -669,35 +498,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_OBTENER_PRODUCTOS`()
 BEGIN
-    SELECT 
-        P.ID_PRODUCTO,
-        P.NOMBRE,
-        P.PRECIO,
-        P.CANTIDAD,
-        M.NOMBRE_MARCA,
-        C.NOMBRE_CATEGORIA
-    FROM TBL_PRODUCTOS P
-    INNER JOIN TBL_MARCAS M ON P.ID_MARCA = M.ID_MARCA
-    INNER JOIN TBL_CATEGORIAS C ON P.ID_CATEGORIA = C.ID_CATEGORIA;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `SP_OBTENER_USUARIOS` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_OBTENER_USUARIOS`()
-BEGIN
-    SELECT * FROM TBL_USUARIOS;
+    SELECT * FROM TBL_PRODUCTOS;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -716,15 +517,11 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_VER_CARRITO`(IN p_usuario INT)
 BEGIN
-    SELECT 
-        P.NOMBRE,
-        IC.CANTIDAD,
-        P.PRECIO,
-        (IC.CANTIDAD * P.PRECIO) AS SUBTOTAL
+    SELECT P.NOMBRE, IC.CANTIDAD, P.PRECIO
     FROM TBL_ITEM_CARRITO IC
-    INNER JOIN TBL_CARRITO C ON IC.ID_CARRITO = C.ID_CARRITO
-    INNER JOIN TBL_PRODUCTOS P ON IC.ID_PRODUCTO = P.ID_PRODUCTO
-    WHERE C.ID_USUARIO = p_usuario;
+    INNER JOIN TBL_CARRITO C ON IC.ID_CARRITO=C.ID_CARRITO
+    INNER JOIN TBL_PRODUCTOS P ON IC.ID_PRODUCTO=P.ID_PRODUCTO
+    WHERE C.ID_USUARIO=p_usuario;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -741,4 +538,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-03-27 11:55:55
+-- Dump completed on 2026-04-03 22:35:17

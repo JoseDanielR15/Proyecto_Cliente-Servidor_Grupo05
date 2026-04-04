@@ -28,6 +28,14 @@ $productos = ConsultarProductosController();
                 <div class="alert alert-success">
                     Producto eliminado correctamente
                 </div>
+            <?php } elseif ($_GET["mensaje"] == "registrado") { ?>
+                <div class="alert alert-success">
+                    Producto registrado correctamente
+                </div>
+            <?php } elseif ($_GET["mensaje"] == "editado") { ?>
+                <div class="alert alert-success">
+                    Producto actualizado correctamente
+                </div>
             <?php } ?>
 
         <?php } ?>
@@ -44,8 +52,8 @@ $productos = ConsultarProductosController();
             </thead>
 
             <tbody>
-                <?php if (!empty($datos)) { ?>
-                    <?php foreach ($datos as $item) { ?>
+                <?php if (!empty($productos)) { ?>
+                    <?php foreach ($productos as $item) { ?>
                         <tr>
                             <td><?= $item["IdProducto"] ?></td>
                             <td><?= $item["Nombre"] ?></td>

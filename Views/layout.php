@@ -72,6 +72,12 @@ function MostrarHeader()
                     <span class="flex-c-m trans-04 p-lr-25">
                         Bienvenido, ' . htmlspecialchars($nombreUsuario) . '
                     </span>
+                    <a href="../vSeguridad/cambiarPerfil.php" class="flex-c-m trans-04 p-lr-25">
+                        Perfil
+                    </a>
+                    <a href="../vSeguridad/cambiarAcceso.php" class="flex-c-m trans-04 p-lr-25">
+                        Seguridad
+                    </a>
                     <a href="#0" onclick="CerrarSesion()" class="flex-c-m trans-04 p-lr-25">
                         Cerrar Sesión
                     </a>';
@@ -182,11 +188,13 @@ function MostrarJS()
 <!-- ================= VALIDACIONES ================= -->
 <script src="../assets/funciones/login.js"></script>
 <script src="../assets/funciones/registro.js"></script>
-<script src="../assets/funciones/recuperar.js"></script>
-<script src="../assets/funciones/reset.js"></script>
-<script src="../assets/funciones/sesion.js"></script>
-<script src="../assets/funciones/productos.js"></script>
+<script src="../assets/funciones/recuperarAcesso.js"></script>
+<script src="../assets/funciones/resetContrasenna.js"></script>
+<script src="../assets/funciones/cerrarSesion.js"></script>
+<script src="../assets/funciones/consultarProductos.js"></script>
 <script src="../assets/funciones/validacionesProductos.js"></script>
+<script src="../assets/funciones/cambiarAcceso.js"></script>
+<script src="../assets/funciones/cambiarPerfil.js"></script>
 </body>
 </html>
 ';
