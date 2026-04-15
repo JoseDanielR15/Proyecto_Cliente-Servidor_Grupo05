@@ -27,13 +27,13 @@ include_once "../../Controllers/cAutenticacion.php";
                     <div class="form-group">
                         <label for="Identificacion">Identificación (Cédula)</label>
                         <input type="text" class="form-control" id="Identificacion" name="Identificacion"
-                            placeholder="Tu número de identificación" required>
+                            onkeyup="ConsultarNombre();" placeholder="Tu número de identificación" required>
                     </div>
 
                     <div class="form-group">
                         <label for="Nombre">Nombre Completo</label>
                         <input type="text" id="Nombre" name="Nombre" class="form-control"
-                            placeholder="Tu nombre completo" required>
+                            placeholder="Tu nombre completo" readonly required>
                     </div>
 
                     <div class="form-group">
