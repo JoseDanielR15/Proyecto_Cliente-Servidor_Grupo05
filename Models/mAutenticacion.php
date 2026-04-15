@@ -14,12 +14,12 @@ function RegistrarModel($identificacion, $nombre, $contrasenna, $correoElectronc
     }
 }
 
-function IniciarSesionModel($identificacion, $contrasenna)
+function IniciarSesionModel($correoElectronico, $contrasenna)
 {
     try {
         $context = OpenDatabase();
 
-        $sp = "CALL SP_LOGIN('$identificacion', '$contrasenna')";
+        $sp = "CALL SP_LOGIN('$correoElectronico', '$contrasenna')";
         $result = $context->query($sp);
 
         $datos = null;

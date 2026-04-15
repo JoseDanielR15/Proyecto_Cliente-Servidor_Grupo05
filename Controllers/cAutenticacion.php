@@ -5,13 +5,13 @@ if (session_status() === PHP_SESSION_NONE) {
 include_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Models/mAutenticacion.php";
 
 if (isset($_POST["btnIniciarSesion"])) {
-    $identificacion = $_POST["Identificacion"];
+    $correoElectronico = $_POST["CorreoElectronico"];
     $contrasenna = $_POST["Contrasenna"];
-    $result = IniciarSesionModel($identificacion, $contrasenna);
+    $result = IniciarSesionModel($correoElectronico, $contrasenna);
     if ($result) {
-        $_SESSION["NombreUsuario"] = $result["Nombre"];
-        $_SESSION["Consecutivo"] = $result["Consecutivo"];
-        $_SESSION["CorreoElectronico"] = $result["CorreoElectronico"];
+        $_SESSION["NombreUsuario"] = $result["NOMBRE"];
+        $_SESSION["Consecutivo"] = $result["ID_USUARIO"];
+        $_SESSION["CorreoElectronico"] = $result["EMAIL"];
         header("Location: ../Views/vInicio/Inicio.php");
         exit;
     } else {

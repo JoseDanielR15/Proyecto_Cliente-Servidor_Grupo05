@@ -55,20 +55,20 @@ $productos = ConsultarProductosController();
                 <?php if (!empty($productos)) { ?>
                     <?php foreach ($productos as $item) { ?>
                         <tr>
-                            <td><?= $item["IdProducto"] ?></td>
-                            <td><?= $item["Nombre"] ?></td>
-                            <td><?= $item["Precio"] ?></td>
-                            <td><?= $item["Cantidad"] ?></td>
+                            <td><?= $item["ID_PRODUCTO"] ?></td>
+                            <td><?= $item["NOMBRE"] ?></td>
+                            <td>₡<?= number_format($item["PRECIO"], 2, ',', '.') ?></td>
+                            <td><?= $item["CANTIDAD"] ?></td>
 
                             <td>
-                                <a href="editarProducto.php?id=<?= $item["IdProducto"] ?>"
+                                <a href="editarProducto.php?id=<?= $item["ID_PRODUCTO"] ?>"
                                     class="btn btn-warning btn-sm">
                                     Editar
                                 </a>
 
-                                <a href="eliminarProducto.php?id=<?= $item["IdProducto"] ?>"
+                                <a href="#"
                                     class="btn btn-danger btn-sm"
-                                    onclick="return confirm('¿Seguro que desea eliminar este producto?');">
+                                    onclick="return confirmarEliminacion(<?= $item['ID_PRODUCTO'] ?>, '<?= htmlspecialchars($item['NOMBRE']) ?>');">
                                     Eliminar
                                 </a>
                             </td>

@@ -47,7 +47,7 @@ if (isset($_POST["btnRegistrar"])) {
         <div class="alert alert-danger"><?= $mensaje ?></div>
     <?php } ?>
 
-    <form method="POST" id="formProducto" enctype="multipart/form-data">
+    <form method="POST" id="formProducto" enctype="multipart/form-data" onsubmit="return confirmarRegistroProducto(event);">
 
         <div class="mb-3">
             <label>Nombre</label>
@@ -83,6 +83,31 @@ if (isset($_POST["btnRegistrar"])) {
         </a>
 
     </form>
+    
+    <script>
+        function confirmarRegistroProducto(event) {
+            event.preventDefault();
+            
+            const nombre = document.getElementById('Nombre').value;
+            const precio = document.getElementById('Precio').value;
+            const cantidad = document.getElementById('Cantidad').value;
+            
+            Swal.fire({
+                title: '¿Agregar producto?',
+                html: `<strong>${nombre}</strong><br>Precio: ₡${parseFloat(precio).toLocaleString('es-CR', {minimumFractionDigits: 2})}<br>Cantidad: ${cantidad} unidades`,
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#28a745',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Sí, agregar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('formProducto').submit();
+                }
+            });
+        }
+    </script>
 </div>
 
 <?php MostrarFooter(); ?>

@@ -4,7 +4,7 @@ $(function () {
             Identificacion: { required: true },
             Nombre: { required: true },
             CorreoElectronico: { required: true, email: true },
-            Contrasenna: { required: true, minlength: 8, maxlength: 15 }
+            Contrasenna: { required: true, minlength: 6, maxlength: 20 }
         },
         messages: {
             Identificacion: { required: "Campo obligatorio" },
@@ -15,8 +15,8 @@ $(function () {
             },
             Contrasenna: {
                 required: "Campo obligatorio",
-                minlength: "Mínimo 8 caracteres",
-                maxlength: "Máximo 15 caracteres"
+                minlength: "Mínimo 6 caracteres",
+                maxlength: "Máximo 20 caracteres"
             }
         },
         errorElement: "span",
@@ -33,29 +33,6 @@ $(function () {
         }
     });
 });
-
-
-
-function ConsultarNombre() {
-    document.getElementById("Nombre").value = "";
-    let identificacion = document.getElementById("Identificacion").value;
-
-    if (identificacion.length >= 9) {
-        $.ajax({
-            url: "https://apis.gometa.org/cedulas/" + identificacion,
-            method: "GET",
-            dataType: "json",
-            success: function (response) {
-                if (response.resultcount > 0) {
-                    document.getElementById("Nombre").value = response.nombre;
-                }
-            },
-            error: function () {
-                alert("Hubo un problema al consultar la información.");
-            }
-        });
-    }
-}
 
 
 

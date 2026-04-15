@@ -181,6 +181,8 @@ function MostrarJS()
 <script src="../assets/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
 <script src="../assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script src="../assets/vendor/slick/slick.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.datatables.net/2.3.7/js/jquery.dataTables.min.js"></script>
 <script src="../assets/js/main.js"></script>
 <script src="../assets/js/banner.js"></script>
 <script src="../assets/js/editarDatos.js"></script>
@@ -195,6 +197,7 @@ function MostrarJS()
 <script src="../assets/funciones/validacionesProductos.js"></script>
 <script src="../assets/funciones/cambiarAcceso.js"></script>
 <script src="../assets/funciones/cambiarPerfil.js"></script>
+<script src="../assets/funciones/sweetalert-productos.js"></script>
 </body>
 </html>
 ';

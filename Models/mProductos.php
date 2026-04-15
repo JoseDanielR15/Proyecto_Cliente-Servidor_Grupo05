@@ -7,8 +7,8 @@ function ConsultarProductosModel()
     try {
         $context = OpenDatabase();
 
-        $query = "SELECT IdProducto, Nombre, Precio, Cantidad FROM productos";
-        $result = $context->query($query);
+        $sp = "CALL SP_OBTENER_PRODUCTOS()";
+        $result = $context->query($sp);
 
         $datos = [];
         while ($fila = $result->fetch_assoc()) {
@@ -29,8 +29,8 @@ function InsertarProductoModel($nombre, $descripcion, $precio, $cantidad, $image
     try {
         $context = OpenDatabase();
 
-        $query = "INSERT INTO tbl_productos (NOMBRE, DESCRIPCION, PRECIO, CANTIDAD, IMAGEN) 
-                  VALUES ('$nombre', '$descripcion', '$precio', '$cantidad', '$imagen')";
+        $query = "INSERT INTO tbl_productos (NOMBRE, DESCRIPCION, PRECIO, CANTIDAD, IMAGEN, ID_ESTADO) 
+                  VALUES ('$nombre', '$descripcion', '$precio', '$cantidad', '$imagen', 1)";
 
         $result = $context->query($query);
 
@@ -49,9 +49,9 @@ function ObtenerProductoModel($idProducto)
     try {
         $context = OpenDatabase();
 
-        $query = "SELECT IdProducto, Nombre, Precio, Cantidad 
-                  FROM productos 
-                  WHERE IdProducto = '$idProducto'";
+        $query = "SELECT ID_PRODUCTO as IdProducto, NOMBRE as Nombre, PRECIO as Precio, CANTIDAD as Cantidad 
+                  FROM tbl_productos 
+                  WHERE ID_PRODUCTO = '$idProducto'";
 
         $result = $context->query($query);
 
@@ -74,9 +74,9 @@ function ActualizarProductoModel($idProducto, $nombre, $precio, $cantidad)
     try {
         $context = OpenDatabase();
 
-        $query = "UPDATE productos 
-                  SET Nombre='$nombre', Precio='$precio', Cantidad='$cantidad'
-                  WHERE IdProducto='$idProducto'";
+        $query = "UPDATE tbl_productos 
+                  SET NOMBRE='$nombre', PRECIO='$precio', CANTIDAD='$cantidad'
+                  WHERE ID_PRODUCTO='$idProducto'";
 
         $result = $context->query($query);
 
@@ -91,13 +91,18 @@ function ActualizarProductoModel($idProducto, $nombre, $precio, $cantidad)
 // ================= ELIMINAR =================
 function EliminarProductoModel($idProducto)
 {
-    $context = OpenDatabase();
+    try {
+        $context = OpenDatabase();
 
-    $query = "DELETE FROM productos WHERE IdProducto = '$idProducto'";
+        $query = "DELETE FROM tbl_productos WHERE ID_PRODUCTO = '$idProducto'";
 
-    $result = $context->query($query);
+        $result = $context->query($query);
 
-    CloseDatabase($context);
-    return $result;
+        CloseDatabase($context);
+        return $result;
+
+    } catch (Exception $e) {
+        return false;
+    }
 }
 ?>

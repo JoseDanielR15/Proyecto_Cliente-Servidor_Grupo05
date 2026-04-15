@@ -25,20 +25,14 @@ include_once "../layout.php";
                 <div class="login-card">
                     <form action="../../Controllers/cAutenticacion.php" method="POST" id="formLogin" novalidate>
                         <div class="form-group">
-                            <label for="Identificacion">Identificación</label>
-                            <input type="text" class="form-control" id="Identificacion" name="Identificacion"
-                                onkeyup="ConsultarNombre();" placeholder="Tu número de identificación" required>
+                            <label for="CorreoElectronico">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="CorreoElectronico" name="CorreoElectronico"
+                                placeholder="Tu correo electrónico" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="Nombre">Nombre Completo</label>
-                            <input type="text" id="Nombre" name="Nombre" class="form-control" readonly
-                                placeholder="Tu nombre">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password">Contraseña</label>
-                            <input type="password" class="form-control" id="password" name="password"
+                            <label for="Contrasenna">Contraseña</label>
+                            <input type="password" class="form-control" id="Contrasenna" name="Contrasenna"
                                 placeholder="Tu contraseña" required>
                         </div>
                         <?php if (!empty($_SESSION["Mensaje"])): ?>
@@ -81,28 +75,6 @@ include_once "../layout.php";
         </div>
     </div>
     <?php MostrarFooter(); ?>
-    <script>
-        function ConsultarNombre() {
-            document.getElementById("Nombre").value = "";
-            let identificacion = document.getElementById("Identificacion").value;
-
-            if (identificacion.length >= 9) {
-                $.ajax({
-                    url: "https://apis.gometa.org/cedulas/" + identificacion,
-                    method: "GET",
-                    dataType: "json",
-                    success: function (response) {
-                        if (response.resultcount > 0) {
-                            document.getElementById("Nombre").value = response.nombre;
-                        }
-                    },
-                    error: function () {
-                        alert("Hubo un problema al consultar la información.");
-                    }
-                });
-            }
-        }
-    </script>
     <style>
         .auth-links {
             padding-bottom: 70px;

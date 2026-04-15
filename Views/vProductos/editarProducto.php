@@ -41,7 +41,7 @@ if (isset($_POST["btnActualizar"])) {
         <div class="alert alert-danger"><?= $mensaje ?></div>
     <?php } ?>
 
-    <form method="POST" id="formProducto">
+    <form method="POST" id="formProducto" onsubmit="return confirmarActualizacionProducto(event);">
 
         <input type="hidden" name="IdProducto" value="<?= $producto["IdProducto"] ?>">
 
@@ -72,6 +72,31 @@ if (isset($_POST["btnActualizar"])) {
         </a>
 
     </form>
+    
+    <script>
+        function confirmarActualizacionProducto(event) {
+            event.preventDefault();
+            
+            const nombre = document.getElementById('Nombre').value;
+            const precio = document.getElementById('Precio').value;
+            const cantidad = document.getElementById('Cantidad').value;
+            
+            Swal.fire({
+                title: '¿Actualizar producto?',
+                html: `<strong>${nombre}</strong><br>Precio: ₡${parseFloat(precio).toLocaleString('es-CR', {minimumFractionDigits: 2})}<br>Cantidad: ${cantidad} unidades`,
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#007bff',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Sí, actualizar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('formProducto').submit();
+                }
+            });
+        }
+    </script>
 </div>
 
 <?php MostrarFooter(); ?>

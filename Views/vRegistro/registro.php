@@ -25,15 +25,15 @@ include_once "../../Controllers/cAutenticacion.php";
                 <form action="../../Controllers/cAutenticacion.php" method="POST" id="formRegistro" novalidate>
 
                     <div class="form-group">
-                        <label for="Identificacion">Identificación</label>
+                        <label for="Identificacion">Identificación (Cédula)</label>
                         <input type="text" class="form-control" id="Identificacion" name="Identificacion"
-                            onkeyup="ConsultarNombre();" placeholder="Tu número de identificación" required>
+                            placeholder="Tu número de identificación" required>
                     </div>
 
                     <div class="form-group">
                         <label for="Nombre">Nombre Completo</label>
-                        <input type="text" id="Nombre" name="Nombre" class="form-control" readonly
-                            placeholder="Tu nombre">
+                        <input type="text" id="Nombre" name="Nombre" class="form-control"
+                            placeholder="Tu nombre completo" required>
                     </div>
 
                     <div class="form-group">

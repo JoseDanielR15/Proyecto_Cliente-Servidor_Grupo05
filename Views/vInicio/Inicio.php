@@ -1,5 +1,13 @@
 <?php
 include_once "../layout.php";
+include_once "../../Controllers/cProductos.php";
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Consultar productos
+$productos = ConsultarProductosController();
 ?>
 
 <!DOCTYPE html>
@@ -89,7 +97,54 @@ include_once "../layout.php";
 	<!-- Bootstrap JS -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
+	<!-- ================= PRODUCTOS ================= -->
+	<div class="sec-product bg0 p-t-100 p-b-50">
+		<div class="container">
+			<div class="p-b-32">
+				<h3 class="ltext-105 cl5 txt-left p-b-20">Productos Destacados</h3>
+				<p class="stext-102 cl3">Descubre nuestra selección de productos de tecnología</p>
+			</div>
 
+			<div class="row">
+				<?php 
+				if (!empty($productos)) {
+					foreach ($productos as $producto) {
+						echo '<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item">';
+						echo 	'<div class="block2">';
+						echo 		'<div class="block2-pic hov-img0">';
+						
+						// Mostrar imagen si existe
+						if (!empty($producto['IMAGEN'])) {
+							echo '<img src="' . htmlspecialchars($producto['IMAGEN']) . '" alt="' . htmlspecialchars($producto['NOMBRE']) . '">';
+						} else {
+							echo '<img src="../assets/images/placeholder.png" alt="' . htmlspecialchars($producto['NOMBRE']) . '">';
+						}
+						
+						echo 		'</div>';
+						echo 		'<div class="block2-txt flex-w flex-t p-t-14">';
+						echo 			'<div class="block2-txt-child1 flex-col-l">';
+						echo 				'<a href="#" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2">' . htmlspecialchars($producto['NOMBRE']) . '</a>';
+						echo 				'<span class="stext-105 cl3">₡' . number_format($producto['PRECIO'], 2, ',', '.') . '</span>';
+						echo 			'</div>';
+						echo 			'<div class="block2-txt-child2 flex-r p-t-3">';
+						echo 				'<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">';
+						echo 					'<img class="icon-heart1" src="../assets/images/icons/heart.png" alt="">';
+						echo 					'<img class="icon-heart2" src="../assets/images/icons/heart-filled.png" alt="">';
+						echo 				'</a>';
+						echo 			'</div>';
+						echo 		'</div>';
+						echo 	'</div>';
+						echo '</div>';
+					}
+				} else {
+					echo '<div class="col-12 text-center">';
+					echo 	'<p class="stext-102 cl3">No hay productos disponibles en este momento.</p>';
+					echo '</div>';
+				}
+				?>
+			</div>
+		</div>
+	</div>
 
 	<div class="sec-banner bg0 p-t-80 p-b-50">
 		<div class="container">
