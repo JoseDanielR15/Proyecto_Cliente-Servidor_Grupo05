@@ -4,16 +4,16 @@ include_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Con
 
 if (isset($_POST["btnRegistrar"])) {
 
-    $nombre = $_POST["Nombre"];
+    $nombre      = $_POST["Nombre"];
     $descripcion = $_POST["Descripcion"];
-    $precio = $_POST["Precio"];
-    $cantidad = $_POST["Cantidad"];
+    $precio      = $_POST["Precio"];
+    $cantidad    = $_POST["Cantidad"];
 
-    $imagenPath = null;
+    $imagenPath = '';
     if (isset($_FILES["Imagen"]) && $_FILES["Imagen"]["error"] == 0) {
         $targetDir = "../assets/images/productos/";
         if (!is_dir($targetDir)) mkdir($targetDir, 0755, true);
-        $fileName = uniqid() . "_" . basename($_FILES["Imagen"]["name"]);
+        $fileName   = uniqid() . "_" . basename($_FILES["Imagen"]["name"]);
         $targetFile = $targetDir . $fileName;
         if (move_uploaded_file($_FILES["Imagen"]["tmp_name"], $targetFile)) {
             $imagenPath = "Views/assets/images/productos/" . $fileName;
@@ -47,7 +47,10 @@ if (isset($_POST["btnRegistrar"])) {
         <div class="alert alert-danger"><?= $mensaje ?></div>
     <?php } ?>
 
-    <form method="POST" id="formProducto" enctype="multipart/form-data" onsubmit="return confirmarRegistroProducto(event);">
+    <form method="POST" id="formProducto" enctype="multipart/form-data">
+
+        <!-- Input hidden que reemplaza el botón en el POST cuando SweetAlert hace submit() -->
+        <input type="hidden" name="btnRegistrar" value="1">
 
         <div class="mb-3">
             <label>Nombre</label>
@@ -74,7 +77,7 @@ if (isset($_POST["btnRegistrar"])) {
             <input type="file" id="Imagen" name="Imagen" class="form-control" accept="image/*">
         </div>
 
-        <button type="submit" name="btnRegistrar" class="btn btn-primary">
+        <button type="button" onclick="confirmarRegistroProducto()" class="btn btn-primary">
             Registrar
         </button>
 
@@ -83,15 +86,18 @@ if (isset($_POST["btnRegistrar"])) {
         </a>
 
     </form>
-    
+
     <script>
-        function confirmarRegistroProducto(event) {
-            event.preventDefault();
-            
-            const nombre = document.getElementById('Nombre').value;
-            const precio = document.getElementById('Precio').value;
+        function confirmarRegistroProducto() {
+            const nombre   = document.getElementById('Nombre').value;
+            const precio   = document.getElementById('Precio').value;
             const cantidad = document.getElementById('Cantidad').value;
-            
+
+            if (!nombre || !precio || !cantidad) {
+                Swal.fire('Campos requeridos', 'Por favor completá todos los campos obligatorios.', 'warning');
+                return;
+            }
+
             Swal.fire({
                 title: '¿Agregar producto?',
                 html: `<strong>${nombre}</strong><br>Precio: ₡${parseFloat(precio).toLocaleString('es-CR', {minimumFractionDigits: 2})}<br>Cantidad: ${cantidad} unidades`,

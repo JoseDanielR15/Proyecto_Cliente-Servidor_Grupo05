@@ -9,12 +9,24 @@ if (isset($_GET["id"])) {
 
 if (isset($_POST["btnActualizar"])) {
 
-    $id = $_POST["IdProducto"];
-    $nombre = $_POST["Nombre"];
-    $precio = $_POST["Precio"];
-    $cantidad = $_POST["Cantidad"];
+    $id          = $_POST["IdProducto"];
+    $nombre      = $_POST["Nombre"];
+    $descripcion = $_POST["Descripcion"];
+    $precio      = $_POST["Precio"];
+    $cantidad    = $_POST["Cantidad"];
 
-    $resultado = ActualizarProductoController($id, $nombre, $precio, $cantidad);
+    $imagen = '';
+    if (isset($_FILES["Imagen"]) && $_FILES["Imagen"]["error"] == 0) {
+        $targetDir = "../assets/images/productos/";
+        if (!is_dir($targetDir)) mkdir($targetDir, 0755, true);
+        $fileName   = uniqid() . "_" . basename($_FILES["Imagen"]["name"]);
+        $targetFile = $targetDir . $fileName;
+        if (move_uploaded_file($_FILES["Imagen"]["tmp_name"], $targetFile)) {
+            $imagen = "Views/assets/images/productos/" . $fileName;
+        }
+    }
+
+    $resultado = ActualizarProductoController($id, $nombre, $precio, $cantidad, $descripcion, $imagen);
 
     if ($resultado) {
         header("Location: consultarProductos.php?mensaje=editado");
@@ -41,29 +53,46 @@ if (isset($_POST["btnActualizar"])) {
         <div class="alert alert-danger"><?= $mensaje ?></div>
     <?php } ?>
 
-    <form method="POST" id="formProducto" onsubmit="return confirmarActualizacionProducto(event);">
+    <form method="POST" id="formProducto" enctype="multipart/form-data">
 
-        <input type="hidden" name="IdProducto" value="<?= $producto["IdProducto"] ?>">
+        <!-- Hidden que garantiza que btnActualizar llegue al POST aunque SweetAlert haga submit() -->
+        <input type="hidden" name="btnActualizar" value="1">
+        <input type="hidden" name="IdProducto" value="<?= $producto["ID_PRODUCTO"] ?>">
 
         <div class="mb-3">
             <label>Nombre</label>
-            <input type="text" id="Nombre" name="Nombre" class="form-control" 
-                   value="<?= $producto["Nombre"] ?>" required>
+            <input type="text" id="Nombre" name="Nombre" class="form-control"
+                   value="<?= htmlspecialchars($producto["NOMBRE"]) ?>" required>
+        </div>
+
+        <div class="mb-3">
+            <label>Descripción</label>
+            <textarea id="Descripcion" name="Descripcion" class="form-control"
+                      rows="3"><?= htmlspecialchars($producto["DESCRIPCION"]) ?></textarea>
         </div>
 
         <div class="mb-3">
             <label>Precio</label>
-            <input type="number" step="0.01" id="Precio" name="Precio" class="form-control" 
-                   value="<?= $producto["Precio"] ?>" required>
+            <input type="number" step="0.01" id="Precio" name="Precio" class="form-control"
+                   value="<?= $producto["PRECIO"] ?>" required>
         </div>
 
         <div class="mb-3">
             <label>Cantidad</label>
-            <input type="number" id="Cantidad" name="Cantidad" class="form-control" 
-                   value="<?= $producto["Cantidad"] ?>" required>
+            <input type="number" id="Cantidad" name="Cantidad" class="form-control"
+                   value="<?= $producto["CANTIDAD"] ?>" required>
         </div>
 
-        <button type="submit" name="btnActualizar" class="btn btn-primary">
+        <div class="mb-3">
+            <?php if (!empty($producto["IMAGEN"])): ?>
+                <label>Imagen actual</label><br>
+                <img src="<?= htmlspecialchars($producto["IMAGEN"]) ?>" width="100" class="mb-2"><br>
+            <?php endif; ?>
+            <label>Cambiar imagen (opcional)</label>
+            <input type="file" id="Imagen" name="Imagen" class="form-control" accept="image/*">
+        </div>
+
+        <button type="button" onclick="confirmarActualizacionProducto()" class="btn btn-primary">
             Actualizar
         </button>
 
@@ -72,15 +101,13 @@ if (isset($_POST["btnActualizar"])) {
         </a>
 
     </form>
-    
+
     <script>
-        function confirmarActualizacionProducto(event) {
-            event.preventDefault();
-            
-            const nombre = document.getElementById('Nombre').value;
-            const precio = document.getElementById('Precio').value;
+        function confirmarActualizacionProducto() {
+            const nombre   = document.getElementById('Nombre').value;
+            const precio   = document.getElementById('Precio').value;
             const cantidad = document.getElementById('Cantidad').value;
-            
+
             Swal.fire({
                 title: '¿Actualizar producto?',
                 html: `<strong>${nombre}</strong><br>Precio: ₡${parseFloat(precio).toLocaleString('es-CR', {minimumFractionDigits: 2})}<br>Cantidad: ${cantidad} unidades`,

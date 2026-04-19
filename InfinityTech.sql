@@ -539,3 +539,234 @@ DELIMITER ;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2026-04-03 22:35:17
+
+-- ── CARRITO ──────────────────────────────────────────────────
+
+DELIMITER $$
+CREATE PROCEDURE SP_OBTENER_CARRITO(IN p_idUsuario INT)
+BEGIN
+    SELECT ID_CARRITO FROM tbl_carrito 
+    WHERE ID_USUARIO = p_idUsuario 
+    LIMIT 1;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_CREAR_CARRITO_USUARIO(IN p_idUsuario INT)
+BEGIN
+    INSERT INTO tbl_carrito (ID_USUARIO) VALUES (p_idUsuario);
+    SELECT LAST_INSERT_ID() AS ID_CARRITO;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_VERIFICAR_ITEM_CARRITO(IN p_idCarrito INT, IN p_idProducto INT)
+BEGIN
+    SELECT ID_ITEM, CANTIDAD FROM tbl_item_carrito
+    WHERE ID_CARRITO = p_idCarrito AND ID_PRODUCTO = p_idProducto;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_ACTUALIZAR_ITEM_CARRITO(IN p_idItem INT, IN p_cantidad INT)
+BEGIN
+    UPDATE tbl_item_carrito SET CANTIDAD = p_cantidad WHERE ID_ITEM = p_idItem;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_INSERTAR_ITEM_CARRITO(IN p_idCarrito INT, IN p_idProducto INT, IN p_cantidad INT)
+BEGIN
+    INSERT INTO tbl_item_carrito (ID_CARRITO, ID_PRODUCTO, CANTIDAD)
+    VALUES (p_idCarrito, p_idProducto, p_cantidad);
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_CONSULTAR_CARRITO(IN p_idUsuario INT)
+BEGIN
+    SELECT ic.ID_ITEM, ic.ID_PRODUCTO, p.NOMBRE, c.FECHA_CREACION,
+           ic.CANTIDAD, p.PRECIO, (ic.CANTIDAD * p.PRECIO) AS TOTAL, p.IMAGEN
+    FROM tbl_item_carrito ic
+    INNER JOIN tbl_carrito c ON ic.ID_CARRITO = c.ID_CARRITO
+    INNER JOIN tbl_productos p ON ic.ID_PRODUCTO = p.ID_PRODUCTO
+    WHERE c.ID_USUARIO = p_idUsuario;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_RESUMEN_CARRITO(IN p_idUsuario INT)
+BEGIN
+    SELECT COALESCE(SUM(ic.CANTIDAD), 0) AS TotalCantidad,
+           COALESCE(SUM(ic.CANTIDAD * p.PRECIO), 0) AS TotalPago
+    FROM tbl_item_carrito ic
+    INNER JOIN tbl_carrito c ON ic.ID_CARRITO = c.ID_CARRITO
+    INNER JOIN tbl_productos p ON ic.ID_PRODUCTO = p.ID_PRODUCTO
+    WHERE c.ID_USUARIO = p_idUsuario;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_REMOVER_ITEM_CARRITO(IN p_idItem INT)
+BEGIN
+    DELETE FROM tbl_item_carrito WHERE ID_ITEM = p_idItem;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_TOTAL_CARRITO(IN p_idCarrito INT)
+BEGIN
+    SELECT COALESCE(SUM(ic.CANTIDAD * p.PRECIO), 0) AS Total
+    FROM tbl_item_carrito ic
+    INNER JOIN tbl_productos p ON ic.ID_PRODUCTO = p.ID_PRODUCTO
+    WHERE ic.ID_CARRITO = p_idCarrito;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_CREAR_FACTURA(IN p_idUsuario INT, IN p_total DECIMAL(10,2))
+BEGIN
+    INSERT INTO tbl_facturas (ID_USUARIO, ID_DIRECCION, TOTAL, ID_ESTADO_VENTA)
+    VALUES (p_idUsuario, NULL, p_total, 1);
+    SELECT LAST_INSERT_ID() AS ID_FACTURA;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_CREAR_DETALLE_FACTURA(IN p_idFactura INT, IN p_idCarrito INT)
+BEGIN
+    INSERT INTO tbl_detalle_fact (ID_FACTURA, ID_PRODUCTO, CANTIDAD, PRECIO_UNITARIO_MOMENTO)
+    SELECT p_idFactura, ic.ID_PRODUCTO, ic.CANTIDAD, p.PRECIO
+    FROM tbl_item_carrito ic
+    INNER JOIN tbl_productos p ON ic.ID_PRODUCTO = p.ID_PRODUCTO
+    WHERE ic.ID_CARRITO = p_idCarrito;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_DESCONTAR_STOCK(IN p_idCarrito INT)
+BEGIN
+    UPDATE tbl_productos p
+    INNER JOIN tbl_item_carrito ic ON p.ID_PRODUCTO = ic.ID_PRODUCTO
+    SET p.CANTIDAD = p.CANTIDAD - ic.CANTIDAD
+    WHERE ic.ID_CARRITO = p_idCarrito;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_VACIAR_CARRITO(IN p_idCarrito INT)
+BEGIN
+    DELETE FROM tbl_item_carrito WHERE ID_CARRITO = p_idCarrito;
+END$$
+DELIMITER ;
+
+-- ── FACTURAS ─────────────────────────────────────────────────
+
+DELIMITER $$
+CREATE PROCEDURE SP_CONSULTAR_FACTURAS_USUARIO(IN p_idUsuario INT)
+BEGIN
+    SELECT f.ID_FACTURA, f.FECHA_CREACION, f.TOTAL, ev.DESCRIPCION AS ESTADO
+    FROM tbl_facturas f
+    INNER JOIN tbl_estados_venta ev ON f.ID_ESTADO_VENTA = ev.ID_ESTADO_VENTA
+    WHERE f.ID_USUARIO = p_idUsuario
+    ORDER BY f.FECHA_CREACION DESC;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_CONSULTAR_TODAS_FACTURAS()
+BEGIN
+    SELECT f.ID_FACTURA, u.NOMBRE AS CLIENTE, u.EMAIL,
+           f.FECHA_CREACION, f.TOTAL, ev.DESCRIPCION AS ESTADO
+    FROM tbl_facturas f
+    INNER JOIN tbl_usuarios u ON f.ID_USUARIO = u.ID_USUARIO
+    INNER JOIN tbl_estados_venta ev ON f.ID_ESTADO_VENTA = ev.ID_ESTADO_VENTA
+    ORDER BY f.FECHA_CREACION DESC;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_CONSULTAR_DETALLE_FACTURA(IN p_idFactura INT)
+BEGIN
+    SELECT df.ID_DETALLE, p.NOMBRE, p.IMAGEN,
+           df.CANTIDAD, df.PRECIO_UNITARIO_MOMENTO,
+           (df.CANTIDAD * df.PRECIO_UNITARIO_MOMENTO) AS SUBTOTAL
+    FROM tbl_detalle_fact df
+    INNER JOIN tbl_productos p ON df.ID_PRODUCTO = p.ID_PRODUCTO
+    WHERE df.ID_FACTURA = p_idFactura;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_ACTUALIZAR_ESTADO_FACTURA(IN p_idFactura INT, IN p_idEstado INT)
+BEGIN
+    UPDATE tbl_facturas SET ID_ESTADO_VENTA = p_idEstado WHERE ID_FACTURA = p_idFactura;
+END$$
+DELIMITER ;
+
+-- ── PRODUCTOS ─────────────────────────────────────────────────
+
+DELIMITER $$
+CREATE PROCEDURE SP_OBTENER_PRODUCTO_ID(IN p_idProducto INT)
+BEGIN
+    SELECT * FROM tbl_productos WHERE ID_PRODUCTO = p_idProducto;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_ACTUALIZAR_PRODUCTO(
+    IN p_idProducto INT,
+    IN p_nombre VARCHAR(150),
+    IN p_descripcion TEXT,
+    IN p_precio DECIMAL(10,2),
+    IN p_cantidad INT,
+    IN p_imagen VARCHAR(255)
+)
+BEGIN
+    IF p_imagen = '' THEN
+        UPDATE tbl_productos
+        SET NOMBRE = p_nombre,
+            DESCRIPCION = p_descripcion,
+            PRECIO = p_precio,
+            CANTIDAD = p_cantidad
+        WHERE ID_PRODUCTO = p_idProducto;
+    ELSE
+        UPDATE tbl_productos
+        SET NOMBRE = p_nombre,
+            DESCRIPCION = p_descripcion,
+            PRECIO = p_precio,
+            CANTIDAD = p_cantidad,
+            IMAGEN = p_imagen
+        WHERE ID_PRODUCTO = p_idProducto;
+    END IF;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_ELIMINAR_PRODUCTO(IN p_idProducto INT)
+BEGIN
+    DELETE FROM tbl_productos WHERE ID_PRODUCTO = p_idProducto;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_CAMBIAR_ESTADO_PRODUCTO(IN p_idProducto INT)
+BEGIN
+    UPDATE tbl_productos
+    SET ID_ESTADO = CASE
+        WHEN ID_ESTADO = 1 THEN 2
+        ELSE 1
+    END
+    WHERE ID_PRODUCTO = p_idProducto;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_VACIAR_CARRITO_USUARIO(IN p_idUsuario INT)
+BEGIN
+    DELETE ic FROM tbl_item_carrito ic
+    INNER JOIN tbl_carrito c ON ic.ID_CARRITO = c.ID_CARRITO
+    WHERE c.ID_USUARIO = p_idUsuario;
+END$$
+DELIMITER ;
+ 
