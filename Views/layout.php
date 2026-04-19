@@ -121,6 +121,10 @@ function MostrarHeader()
                         </li>
 
                         <li>
+                            <a href="../vTecnicos/adminTecnicos.php">Contacto de Tecnicos</a>
+                        </li>
+
+                        <li>
                             <a href="../vInicio/contacto.php">Contacto</a>
                         </li>
 

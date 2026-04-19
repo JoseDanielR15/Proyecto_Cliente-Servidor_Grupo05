@@ -379,6 +379,86 @@ CREATE TABLE `tbl_usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+CREATE TABLE TBL_TECNICOS (
+    ID_TECNICO INT PRIMARY KEY AUTO_INCREMENT,
+    NOMBRE VARCHAR(100) NOT NULL,
+    EMAIL VARCHAR(100) UNIQUE NOT NULL,
+    TELEFONO VARCHAR(20),
+    ESPECIALIDAD VARCHAR(100), -- Ejemplo: Redes, Laptops, Impresoras
+    ID_ESTADO INT,
+    FECHA_REGISTRO TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (ID_ESTADO) REFERENCES TBL_ESTADOS_SISTEMA(ID_ESTADO_SISTEMA)
+);
+
+DELIMITER //
+CREATE PROCEDURE SP_InsertarTecnico(
+    IN p_nombre VARCHAR(100),
+    IN p_email VARCHAR(100),
+    IN p_telefono VARCHAR(20),
+    IN p_especialidad VARCHAR(100),
+    IN p_id_estado INT
+)
+BEGIN
+    INSERT INTO TBL_TECNICOS (NOMBRE, EMAIL, TELEFONO, ESPECIALIDAD, ID_ESTADO)
+    VALUES (p_nombre, p_email, p_telefono, p_especialidad, p_id_estado);
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE SP_ConsultarTecnicos()
+BEGIN
+    SELECT 
+        T.ID_TECNICO, 
+        T.NOMBRE, 
+        T.EMAIL, 
+        T.TELEFONO, 
+        T.ESPECIALIDAD, 
+        E.DESCRIPCION AS ESTADO
+    FROM TBL_TECNICOS T
+    INNER JOIN TBL_ESTADOS_SISTEMA E ON T.ID_ESTADO = E.ID_ESTADO_SISTEMA
+    WHERE T.ID_ESTADO = 1; 
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE SP_ActualizarTecnico(
+    IN p_id_tecnico INT,
+    IN p_nombre VARCHAR(100),
+    IN p_email VARCHAR(100),
+    IN p_telefono VARCHAR(20),
+    IN p_especialidad VARCHAR(100),
+    IN p_id_estado INT
+)
+BEGIN
+    UPDATE TBL_TECNICOS 
+    SET NOMBRE = p_nombre, 
+        EMAIL = p_email, 
+        TELEFONO = p_telefono,
+        ESPECIALIDAD = p_especialidad,
+        ID_ESTADO = p_id_estado
+    WHERE ID_TECNICO = p_id_tecnico;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS SP_EliminarTecnico;
+
+DELIMITER //
+CREATE PROCEDURE SP_ConsultarTecnicos()
+BEGIN
+    SELECT 
+        T.ID_TECNICO, 
+        T.NOMBRE, 
+        T.EMAIL, 
+        T.TELEFONO, 
+        T.ESPECIALIDAD, 
+        E.DESCRIPCION AS ESTADO
+    FROM TBL_TECNICOS T
+    INNER JOIN TBL_ESTADOS_SISTEMA E ON T.ID_ESTADO = E.ID_ESTADO_SISTEMA
+    WHERE T.ID_ESTADO = 1; -- Solo trae a los que están "Activos"
+END //
+DELIMITER ;
+
+
 --
 -- Dumping data for table `tbl_usuarios`
 --
