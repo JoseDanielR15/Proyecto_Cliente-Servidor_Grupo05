@@ -12,6 +12,7 @@ if (isset($_POST["btnIniciarSesion"])) {
         $_SESSION["NombreUsuario"] = $result["NOMBRE"];
         $_SESSION["Consecutivo"] = $result["ID_USUARIO"];
         $_SESSION["CorreoElectronico"] = $result["EMAIL"];
+        $_SESSION["ROL"] = $result["ROL"];
         header("Location: ../Views/vInicio/Inicio.php");
         exit;
     } else {

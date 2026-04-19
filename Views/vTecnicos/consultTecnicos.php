@@ -27,10 +27,6 @@ include_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Con
                 <h4 class="mtext-105 cl2">
                     Lista de Técnicos Registrados
                 </h4>
-                <button type="button" class="flex-c-m stext-101 cl0 size-101 bg3 bor1 hov-btn3 p-lr-15 trans-04"
-                    data-toggle="modal" data-target="#modalTecnico">
-                    <i class="zmdi zmdi-plus m-r-5"></i> Agregar Técnico
-                </button>
             </div>
 
             <div class="wrap-table-shopping-cart" style="border: 1px solid #e6e6e6;">
@@ -41,7 +37,6 @@ include_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Con
                         <th class="column-3">Especialidad</th>
                         <th class="column-4">Teléfono</th>
                         <th class="column-5" style="width: 25%;">Email</th>
-                        <th class="column-6" style="width: 25%;">Acciones</th>
                     </tr>
 
                     <?php
@@ -54,26 +49,6 @@ include_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Con
                             echo '    <td class="column-3">' . $tecnico["ESPECIALIDAD"] . '</td>';
                             echo '    <td class="column-4">' . $tecnico["TELEFONO"] . '</td>';
                             echo '    <td class="column-5" style="width: 25%;!important">' . $tecnico["EMAIL"] . '</td>';
-                            echo '    <td class="column-6" style="width: 25%;!important">
-                                            <div class="flex-w">
-                                                <a href="#" class="btn-sm btn-info m-r-10" 
-                                                data-toggle="modal" 
-                                                data-target="#modalEditarTecnico"
-                                                data-id="' . $tecnico["ID_TECNICO"] . '"
-                                                data-nombre="' . $tecnico["NOMBRE"] . '"
-                                                data-email="' . $tecnico["EMAIL"] . '"
-                                                data-telefono="' . $tecnico["TELEFONO"] . '"
-                                                data-especialidad="' . $tecnico["ESPECIALIDAD"] . '">
-                                                <i class="zmdi zmdi-edit"></i>
-                                                </a>
-
-                                                <a href="adminTecnicos.php?EliminarTecnico=true&id=' . $tecnico["ID_TECNICO"] . '" 
-                                                    class="btn-sm btn-danger" 
-                                                    onclick="return confirm(\'¿Está seguro de que desea inactivar a este técnico? Podrá reactivarlo luego desde la base de datos.\');">
-                                                    <i class="zmdi zmdi-power"></i> 
-                                                </a>
-                                            </div>
-                                        </td>';
                             echo '</tr>';
                         }
                     } else {

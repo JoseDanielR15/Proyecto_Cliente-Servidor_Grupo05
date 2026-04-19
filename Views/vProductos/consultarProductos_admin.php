@@ -18,6 +18,9 @@ $productos = ConsultarProductosController();
 
         <h2 class="mb-4">Lista de Productos</h2>
 
+        <a href="agregarProducto.php" class="btn btn-success mb-3">
+            Agregar Producto
+        </a>
 
         <?php if (isset($_GET["mensaje"])) { ?>
 
@@ -44,6 +47,7 @@ $productos = ConsultarProductosController();
                     <th>Nombre</th>
                     <th>Precio</th>
                     <th>Cantidad</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
 
@@ -55,6 +59,19 @@ $productos = ConsultarProductosController();
                             <td><?= $item["NOMBRE"] ?></td>
                             <td>₡<?= number_format($item["PRECIO"], 2, ',', '.') ?></td>
                             <td><?= $item["CANTIDAD"] ?></td>
+
+                            <td>
+                                <a href="editarProducto.php?id=<?= $item["ID_PRODUCTO"] ?>"
+                                    class="btn btn-warning btn-sm">
+                                    Editar
+                                </a>
+
+                                <a href="#"
+                                    class="btn btn-danger btn-sm"
+                                    onclick="return confirmarEliminacion(<?= $item['ID_PRODUCTO'] ?>, '<?= htmlspecialchars($item['NOMBRE']) ?>');">
+                                    Eliminar
+                                </a>
+                            </td>
                         </tr>
                     <?php } ?>
                 <?php } else { ?>
