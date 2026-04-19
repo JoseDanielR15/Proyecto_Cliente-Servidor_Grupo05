@@ -438,9 +438,16 @@ BEGIN
         E.DESCRIPCION AS ESTADO
     FROM TBL_TECNICOS T
     INNER JOIN TBL_ESTADOS_SISTEMA E ON T.ID_ESTADO = E.ID_ESTADO_SISTEMA
-    WHERE T.ID_ESTADO = 1; -- Solo trae a los que están "Activos"
+    WHERE T.ID_ESTADO = 1; 
 END //
 DELIMITER ;
+
+
+CALL SP_InsertarTecnico('Juan Pérez', 'juan.perez@email.com', '555-0101', 'Redes y Conectividad', 1);
+
+CALL SP_InsertarTecnico('María García', 'm.garcia@email.com', '555-0202', 'Soporte de Hardware', 1);
+
+CALL SP_InsertarTecnico('Carlos Ruiz', 'cruiz@email.com', '555-0303', 'Mantenimiento de Software', 2);
 
 
 --
