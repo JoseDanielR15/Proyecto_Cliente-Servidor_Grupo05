@@ -49,6 +49,17 @@ function MostrarHeader()
     $haySession = isset($_SESSION["NombreUsuario"]);
     if ($haySession) {
         $nombreUsuario = $_SESSION["NombreUsuario"];
+        $rolUsuario = $_SESSION["ROL"];
+    }
+
+    // ================= RUTAS BASE =================
+    $rutaProductos = "../vProductos/consultarProductos.php";
+    $rutaTecnicos  = "../vTecnicos/consultTecnicos.php";
+
+    // ================= ROL ADMINISTRADOR =================
+    if ($rolUsuario === "Administrador") {
+        $rutaProductos = "../vProductos/consultarProductos_admin.php";
+        $rutaTecnicos  = "../vTecnicos/adminTecnicos.php";
     }
 
     echo '
@@ -113,20 +124,26 @@ function MostrarHeader()
                         </li>
 
                         <li>
-                            <a href="../vProductos/consultarProductos.php">Productos</a>
+                            <a href="' . $rutaProductos . '">Productos</a>
                         </li>
+                        
+                        <li>
+                            <a href="' . $rutaTecnicos . '">Contacto de Tecnicos</a>
+                        </li>
+
 
                         <li>
                             <a href="../vInicio/acercaDe.php">Acerca de</a>
                         </li>
 
                         <li>
-                            <a href="../vTecnicos/adminTecnicos.php">Contacto de Tecnicos</a>
-                        </li>
-
-                        <li>
                             <a href="../vInicio/contacto.php">Contacto</a>
                         </li>
+                        <?php if (isset($rolUsuario) && $rolUsuario === "Administrador") { ?>
+                            <li>
+                                <a href="../vEstadisticas/estadisticas.php">|   Estadísticas</a>
+                            </li>
+                        <?php } ?>
 
                     </ul>
                 </div>
