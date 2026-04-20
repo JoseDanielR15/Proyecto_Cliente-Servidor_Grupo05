@@ -108,7 +108,7 @@ function MostrarHeader()
                 <div class="menu-desktop">
                     <ul class="main-menu">
 
-                        <li class="active-menu">
+                        <li>
                             <a href="../vInicio/Inicio.php">Inicio</a>
                         </li>
 

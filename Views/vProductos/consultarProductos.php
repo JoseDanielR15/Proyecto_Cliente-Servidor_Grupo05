@@ -40,45 +40,43 @@ $productos = ConsultarProductosController();
 
         <?php } ?>
 
-        <table id="tProductos" class="table table-bordered table-striped">
+        <table id="tProductos" class="table table-hover align-middle">
             <thead class="table-dark">
                 <tr>
                     <th>ID</th>
-                    <th>Nombre</th>
+                    <th>Miniatura</th> <th>Nombre</th>
                     <th>Precio</th>
-                    <th>Cantidad</th>
+                    <th>Stock</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
-
             <tbody>
-                <?php if (!empty($productos)) { ?>
-                    <?php foreach ($productos as $item) { ?>
-                        <tr>
-                            <td><?= $item["ID_PRODUCTO"] ?></td>
-                            <td><?= $item["NOMBRE"] ?></td>
-                            <td>₡<?= number_format($item["PRECIO"], 2, ',', '.') ?></td>
-                            <td><?= $item["CANTIDAD"] ?></td>
-
-                            <td>
-                                <a href="editarProducto.php?id=<?= $item["ID_PRODUCTO"] ?>"
-                                    class="btn btn-warning btn-sm">
-                                    Editar
-                                </a>
-
-                                <a href="#"
-                                    class="btn btn-danger btn-sm"
-                                    onclick="return confirmarEliminacion(<?= $item['ID_PRODUCTO'] ?>, '<?= htmlspecialchars($item['NOMBRE']) ?>');">
-                                    Eliminar
-                                </a>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                <?php } else { ?>
+                <?php if (!empty($productos)) { 
+                    foreach ($productos as $item) { 
+                        $rutaImagen = !empty($item["IMAGEN"]) ? "/Proyecto_Cliente-Servidor_Grupo05/" . $item["IMAGEN"] : "../assets/images/no-image.png";
+                ?>
                     <tr>
-                        <td colspan="5">No hay productos registrados</td>
+                        <td><?= $item["ID_PRODUCTO"] ?></td>
+                        <td>
+                            <img src="<?= $rutaImagen ?>" class="img-producto img-miniatura" alt="Producto">
+                        </td>
+                        <td><strong><?= htmlspecialchars($item["NOMBRE"]) ?></strong></td>
+                        <td>₡<?= number_format($item["PRECIO"], 2, ',', '.') ?></td>
+                        <td>
+                            <span class="badge <?= $item["CANTIDAD"] > 5 ? 'bg-success' : 'bg-danger' ?>">
+                                <?= $item["CANTIDAD"] ?> uds
+                            </span>
+                        </td>
+                        <td>
+                            <a href="editarProducto.php?id=<?= $item["ID_PRODUCTO"] ?>" class="btn btn-outline-warning btn-sm">
+                                <i class="fa fa-edit"></i> Editar
+                            </a>
+                            <button onclick="confirmarEliminacion(<?= $item['ID_PRODUCTO'] ?>, '<?= htmlspecialchars($item['NOMBRE']) ?>')" class="btn btn-outline-danger btn-sm">
+                                <i class="fa fa-trash"></i> Eliminar
+                            </button>
+                        </td>
                     </tr>
-                <?php } ?>
+                <?php } } ?>
             </tbody>
         </table>
 

@@ -127,15 +127,17 @@ $productos = ConsultarProductosController();
                                   </div>';
                         }
 
-                        echo    '<div class="block2-pic hov-img0" style="' . ($agotado ? 'opacity:0.5;' : '') . '">';
+                        echo '<div class="block2-pic hov-img0" style="height: 250px; display: flex; align-items: center; justify-content: center; background-color: #f8f9fa; ' . ($agotado ? 'opacity:0.5;' : '') . '">';
 
                         if (!empty($producto['IMAGEN'])) {
-                            echo '<img src="' . htmlspecialchars($producto['IMAGEN']) . '" alt="' . htmlspecialchars($producto['NOMBRE']) . '">';
+                            
+                            $rutaImagen = "/Proyecto_Cliente-Servidor_Grupo05/" . htmlspecialchars($producto['IMAGEN']);
+                            echo '<img src="' . $rutaImagen . '" alt="' . htmlspecialchars($producto['NOMBRE']) . '" class="img-fit">';
                         } else {
-                            echo '<img src="../assets/images/placeholder.png" alt="' . htmlspecialchars($producto['NOMBRE']) . '">';
+                            echo '<img src="../assets/images/placeholder.png" alt="Sin imagen" class="img-fit">';
                         }
 
-                        echo    '</div>';
+                        echo '</div>';
                         echo    '<div class="block2-txt flex-w flex-t p-t-14">';
                         echo        '<div class="block2-txt-child1 flex-col-l">';
                         echo            '<a href="#" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2">' . htmlspecialchars($producto['NOMBRE']) . '</a>';
