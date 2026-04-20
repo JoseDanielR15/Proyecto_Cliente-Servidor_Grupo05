@@ -47,6 +47,19 @@ function MostrarCSS()
 function MostrarHeader()
 {
 
+    
+    $nombreUsuario = "";
+
+    if(isset($_SESSION["NombreUsuario"]))
+    {
+        $nombreUsuario = $_SESSION["NombreUsuario"];
+    }
+    else
+    {
+        header("Location: ../vSesion/sesion.php");
+        exit();
+    }
+
 require_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Controllers/CategoriasController.php";
 
     // Verificar si hay sesión activa
