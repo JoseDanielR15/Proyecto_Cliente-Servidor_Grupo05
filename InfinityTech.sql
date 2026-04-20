@@ -450,6 +450,22 @@ CALL SP_InsertarTecnico('María García', 'm.garcia@email.com', '555-0202', 'Sop
 CALL SP_InsertarTecnico('Carlos Ruiz', 'cruiz@email.com', '555-0303', 'Mantenimiento de Software', 2);
 
 
+INSERT INTO tbl_categorias (NOMBRE_CATEGORIA, ID_ESTADO) VALUES 
+('Laptops', 1),
+('Componentes', 1),
+('Periféricos', 1),
+('Monitores', 1),
+('Almacenamiento', 1);
+
+
+INSERT INTO tbl_marcas (NOMBRE_MARCA, ID_ESTADO) VALUES 
+('Asus', 1),
+('Intel', 1),
+('Logitech', 1),
+('Samsung', 1),
+('Corsair', 1),
+('NVIDIA', 1);
+
 --
 -- Dumping data for table `tbl_usuarios`
 --
