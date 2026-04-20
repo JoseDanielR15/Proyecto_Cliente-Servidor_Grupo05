@@ -45,3 +45,8 @@ if (!function_exists("CambiarEstadoProductoController")) {
         return CambiarEstadoProductoModel($idProducto);
     }
 }
+
+function ConsultarProductosPorCategoria($idCategoria)
+{
+    return MostrarProductosPorCategoria($idCategoria);
+}

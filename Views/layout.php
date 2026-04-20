@@ -4,6 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+
 // ==================== FUNCIÓN PARA MOSTRAR HEAD (META TAGS Y FAVICON) ====================
 function MostrarHead()
 {
@@ -38,12 +39,16 @@ function MostrarCSS()
 <link rel="stylesheet" href="/Proyecto_Cliente-Servidor_Grupo05/assets/css/auth.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/util.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/main.css">
+
 ';
 }
 
 // ==================== FUNCIÓN PARA MOSTRAR HEADER (NAVBAR) ====================
 function MostrarHeader()
 {
+
+require_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Controllers/CategoriasController.php";
+
     // Verificar si hay sesión activa
     $nombreUsuario = "";
     $haySession = isset($_SESSION["NombreUsuario"]);
@@ -131,6 +136,31 @@ function MostrarHeader()
                             <a href="' . $rutaTecnicos . '">Contacto de Tecnicos</a>
                         </li>
 
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark fw-bold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Categorias
+                            </a>
+                            <ul class="dropdown-menu shadow border-0" aria-labelledby="navbarDropdown">';
+                                
+                               
+                                $listaCategorias = ConsultarCategorias();
+                                if (!empty($listaCategorias)) {
+
+                                    foreach ($listaCategorias as $cat) {
+                                        
+                                        echo '<li>';
+                                        echo '  <a class="dropdown-item py-2" href="../vProductos/vProductosXCategoria.php?id_cat=' . $cat['ID_Categoria'] . '">';
+                                        echo      htmlspecialchars($cat['Nombre_Categoria']);
+                                        echo '  </a>';
+                                        echo '</li>';
+                                    }
+                                } else {
+                                    echo '<li><a class="dropdown-item disabled">No hay categorías</a></li>';
+                                }
+                
+                                echo '
+                            </ul>
+                        </li>
 
                         <li>
                             <a href="../vInicio/acercaDe.php">Acerca de</a>
@@ -138,13 +168,13 @@ function MostrarHeader()
 
                         <li>
                             <a href="../vInicio/contacto.php">Contacto</a>
-                        </li>
-                        <?php if (isset($rolUsuario) && $rolUsuario === "Administrador") { ?>
-                            <li>
+                        </li>';
+                        if (isset($rolUsuario) && $rolUsuario === "Administrador") { 
+                            echo ' <li>
                                 <a href="../vEstadisticas/estadisticas.php">|   Estadísticas</a>
-                            </li>
-                        <?php } ?>
-
+                            </li>';
+                         }
+                echo '
                     </ul>
                 </div>
 
@@ -207,6 +237,8 @@ function MostrarJS()
 <script src="../assets/js/main.js"></script>
 <script src="../assets/js/banner.js"></script>
 <script src="../assets/js/editarDatos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 
 <!-- ================= VALIDACIONES ================= -->
 <script src="../assets/funciones/login.js"></script>

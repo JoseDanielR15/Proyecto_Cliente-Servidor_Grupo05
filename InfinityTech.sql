@@ -442,6 +442,25 @@ BEGIN
 END //
 DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE SP_MostrarCategorias()
+BEGIN
+    SELECT 
+       ID_Categoria,
+       Nombre_Categoria
+    FROM  TBL_Categorias
+    WHERE ID_ESTADO = 1; -- Solo trae a los que están "Activos"
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE SP_ProductosPorCategoria(IN p_idCategoria INT)
+BEGIN
+    SELECT *
+    FROM tbl_productos
+    WHERE ID_Categoria = p_idCategoria;
+END;//
+DELIMITER ;
 
 CALL SP_InsertarTecnico('Juan Pérez', 'juan.perez@email.com', '555-0101', 'Redes y Conectividad', 1);
 
@@ -465,6 +484,31 @@ INSERT INTO tbl_marcas (NOMBRE_MARCA, ID_ESTADO) VALUES
 ('Samsung', 1),
 ('Corsair', 1),
 ('NVIDIA', 1);
+
+INSERT INTO tbl_productos 
+(ID_CATEGORIA, ID_MARCA, NOMBRE, DESCRIPCION, PRECIO, CANTIDAD, IMAGEN, ID_ESTADO)
+VALUES
+
+-- ================= LAPTOPS (1) =================
+(1, 1, 'Laptop Asus ROG Strix G15', 'Laptop gaming Ryzen 7, 16GB RAM, RTX 3050', 650000, 5, 'assets/images/laptop_asus_rog.png', 1),
+(1, 1, 'Laptop Asus VivoBook 15', 'Laptop uso diario Intel i5, 8GB RAM, SSD 512GB', 420000, 8, 'assets/images/laptop_vivobook.png', 1),
+
+-- ================= COMPONENTES (2) =================
+(2, 2, 'Procesador Intel Core i7 12700K', 'CPU 12va generación alto rendimiento', 280000, 10, 'assets/images/intel_i7.png', 1),
+(2, 6, 'Tarjeta Gráfica NVIDIA RTX 4060', 'GPU gaming 8GB GDDR6', 390000, 6, 'assets/images/rtx_4060.png', 1),
+(2, 5, 'Memoria RAM Corsair 16GB DDR4', 'RAM 3200MHz para gaming', 45000, 15, 'assets/images/corsair_ram.png', 1),
+
+-- ================= PERIFÉRICOS (3) =================
+(3, 3, 'Mouse Logitech G502 Hero', 'Mouse gamer RGB alta precisión', 35000, 20, 'assets/images/logitech_mouse.png', 1),
+(3, 3, 'Teclado Logitech G213', 'Teclado gaming RGB resistente a salpicaduras', 40000, 12, 'assets/images/logitech_keyboard.png', 1),
+
+-- ================= MONITORES (4) =================
+(4, 4, 'Monitor Samsung 24" FHD', 'Monitor 24 pulgadas Full HD 75Hz', 95000, 7, 'assets/images/samsung_monitor.png', 1),
+(4, 1, 'Monitor Asus TUF Gaming 27"', 'Monitor 27 pulgadas 165Hz 1ms', 210000, 4, 'assets/images/asus_monitor.png', 1),
+
+-- ================= ALMACENAMIENTO (5) =================
+(5, 4, 'SSD Samsung 1TB NVMe', 'Disco sólido ultra rápido', 80000, 10, 'assets/images/samsung_ssd.png', 1),
+(5, 5, 'SSD Corsair 512GB', 'SSD SATA alto rendimiento', 45000, 9, 'assets/images/corsair_ssd.png', 1);
 
 --
 -- Dumping data for table `tbl_usuarios`

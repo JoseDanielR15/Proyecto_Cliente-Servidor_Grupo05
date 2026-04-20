@@ -107,3 +107,25 @@ function CambiarEstadoProductoModel($idProducto)
     CloseDatabase($conexion);
     return $ok;
 }
+
+function MostrarProductosPorCategoria($idCategoria)
+{
+    $conexion = OpenDatabase();
+
+    $stmt = mysqli_prepare($conexion, "CALL SP_ProductosPorCategoria(?)");
+    mysqli_stmt_bind_param($stmt, "i", $idCategoria);
+    mysqli_stmt_execute($stmt);
+
+    $result = mysqli_stmt_get_result($stmt);
+
+    $productos = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $productos[] = $row;
+    }
+
+    mysqli_stmt_close($stmt);
+    mysqli_next_result($conexion);
+    CloseDatabase($conexion);
+
+    return $productos;
+}
