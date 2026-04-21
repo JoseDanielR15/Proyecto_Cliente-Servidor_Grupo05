@@ -489,26 +489,28 @@ INSERT INTO tbl_productos
 (ID_CATEGORIA, ID_MARCA, NOMBRE, DESCRIPCION, PRECIO, CANTIDAD, IMAGEN, ID_ESTADO)
 VALUES
 
--- ================= LAPTOPS (1) =================
-(1, 1, 'Laptop Asus ROG Strix G15', 'Laptop gaming Ryzen 7, 16GB RAM, RTX 3050', 650000, 5, 'assets/images/laptop_asus_rog.png', 1),
-(1, 1, 'Laptop Asus VivoBook 15', 'Laptop uso diario Intel i5, 8GB RAM, SSD 512GB', 420000, 8, 'assets/images/laptop_vivobook.png', 1),
+-- ================= LAPTOPS (2) =================
+(1, 2, 'Laptop Asus ROG Strix G15', 'Laptop gaming Ryzen 7, 16GB RAM, RTX 3050', 650000, 5, 'Views/assets/images/productos/69e5c0bd3a821_ROG.jpg', 1),
+(1, 2, 'Laptop Asus VivoBook 15', 'Laptop uso diario Intel i5, 8GB RAM, SSD 512GB', 420000, 8, 'Views/assets/images/productos/69e5c0b08749a_VIVOBOOK.jpg', 1),
 
 -- ================= COMPONENTES (2) =================
-(2, 2, 'Procesador Intel Core i7 12700K', 'CPU 12va generación alto rendimiento', 280000, 10, 'assets/images/intel_i7.png', 1),
-(2, 6, 'Tarjeta Gráfica NVIDIA RTX 4060', 'GPU gaming 8GB GDDR6', 390000, 6, 'assets/images/rtx_4060.png', 1),
-(2, 5, 'Memoria RAM Corsair 16GB DDR4', 'RAM 3200MHz para gaming', 45000, 15, 'assets/images/corsair_ram.png', 1),
+(2, 3, 'Procesador Intel Core i7 12700K', 'CPU 12va generación alto rendimiento', 280000, 10, 'Views/assets/images/productos/69e5c0d3a3277_i7.jpg', 1),
+(2, 3, 'Memoria RAM Corsair 16GB DDR4', 'RAM 3200MHz para gaming', 45000, 15, 'Views/assets/images/productos/69e5c10862598_RAM.jpg', 1),
 
--- ================= PERIFÉRICOS (3) =================
-(3, 3, 'Mouse Logitech G502 Hero', 'Mouse gamer RGB alta precisión', 35000, 20, 'assets/images/logitech_mouse.png', 1),
-(3, 3, 'Teclado Logitech G213', 'Teclado gaming RGB resistente a salpicaduras', 40000, 12, 'assets/images/logitech_keyboard.png', 1),
+-- ================= TARJETAS DE VIDEO (1) =================
+(2, 1, 'Tarjeta Gráfica NVIDIA RTX 4060', 'GPU gaming 8GB GDDR6', 390000, 6, 'Views/assets/images/productos/69e5c0ed206a5_RTX.jpg', 1),
 
--- ================= MONITORES (4) =================
-(4, 4, 'Monitor Samsung 24" FHD', 'Monitor 24 pulgadas Full HD 75Hz', 95000, 7, 'assets/images/samsung_monitor.png', 1),
-(4, 1, 'Monitor Asus TUF Gaming 27"', 'Monitor 27 pulgadas 165Hz 1ms', 210000, 4, 'assets/images/asus_monitor.png', 1),
+-- ================= PERIFÉRICOS (4) =================
+(3, 4, 'Mouse Logitech G502 Hero', 'Mouse gamer RGB alta precisión', 35000, 20, 'Views/assets/images/productos/69e5c1179a854_Mouse.jpg', 1),
+(3, 4, 'Teclado Logitech G213', 'Teclado gaming RGB resistente a salpicaduras', 40000, 12, 'Views/assets/images/productos/69e5c12750312_teclado.jpg', 1),
 
--- ================= ALMACENAMIENTO (5) =================
-(5, 4, 'SSD Samsung 1TB NVMe', 'Disco sólido ultra rápido', 80000, 10, 'assets/images/samsung_ssd.png', 1),
-(5, 5, 'SSD Corsair 512GB', 'SSD SATA alto rendimiento', 45000, 9, 'assets/images/corsair_ssd.png', 1);
+-- ================= MONITORES (5) =================
+(4, 5, 'Monitor Samsung 24" FHD', 'Monitor 24 pulgadas Full HD 75Hz', 95000, 7, 'Views/assets/images/productos/69e5c1368cd50_Monitor Samsung.jpg', 1),
+(4, 5, 'Monitor Asus TUF Gaming 27"', 'Monitor 27 pulgadas 165Hz 1ms', 210000, 4, 'Views/assets/images/productos/69e5c14626f90_Monitor Asus.jpg', 1),
+
+-- ================= ALMACENAMIENTO (6) =================
+(5, 6, 'SSD Samsung 1TB NVMe', 'Disco sólido ultra rápido', 80000, 10, 'Views/assets/images/productos/69e5c15554e9f_SSD Samsung.jpg', 1),
+(5, 6, 'SSD Corsair 512GB', 'SSD SATA alto rendimiento', 45000, 9, 'Views/assets/images/productos/69e5c164b3c73_ssd corsair.avif', 1);
 
 --
 -- Dumping data for table `tbl_usuarios`
