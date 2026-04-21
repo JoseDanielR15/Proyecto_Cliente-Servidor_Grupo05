@@ -18,10 +18,6 @@ $productos = ConsultarProductosController();
 
         <h2 class="mb-4">Lista de Productos</h2>
 
-        <a href="agregarProducto.php" class="btn btn-success mb-3">
-            Agregar Producto
-        </a>
-
         <?php if (isset($_GET["mensaje"])) { ?>
 
             <?php if ($_GET["mensaje"] == "eliminado") { ?>
@@ -44,39 +40,32 @@ $productos = ConsultarProductosController();
             <thead class="table-dark">
                 <tr>
                     <th>ID</th>
-                    <th>Miniatura</th> <th>Nombre</th>
+                    <th>Miniatura</th>
+                    <th>Nombre</th>
                     <th>Precio</th>
                     <th>Stock</th>
-                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <?php if (!empty($productos)) { 
-                    foreach ($productos as $item) { 
+                <?php if (!empty($productos)) {
+                    foreach ($productos as $item) {
                         $rutaImagen = !empty($item["IMAGEN"]) ? "/Proyecto_Cliente-Servidor_Grupo05/" . $item["IMAGEN"] : "../assets/images/no-image.png";
                 ?>
-                    <tr>
-                        <td><?= $item["ID_PRODUCTO"] ?></td>
-                        <td>
-                            <img src="<?= $rutaImagen ?>" class="img-producto img-miniatura" alt="Producto">
-                        </td>
-                        <td><strong><?= htmlspecialchars($item["NOMBRE"]) ?></strong></td>
-                        <td>₡<?= number_format($item["PRECIO"], 2, ',', '.') ?></td>
-                        <td>
-                            <span class="badge <?= $item["CANTIDAD"] > 5 ? 'bg-success' : 'bg-danger' ?>">
-                                <?= $item["CANTIDAD"] ?> uds
-                            </span>
-                        </td>
-                        <td>
-                            <a href="editarProducto.php?id=<?= $item["ID_PRODUCTO"] ?>" class="btn btn-outline-warning btn-sm">
-                                <i class="fa fa-edit"></i> Editar
-                            </a>
-                            <button onclick="confirmarEliminacion(<?= $item['ID_PRODUCTO'] ?>, '<?= htmlspecialchars($item['NOMBRE']) ?>')" class="btn btn-outline-danger btn-sm">
-                                <i class="fa fa-trash"></i> Eliminar
-                            </button>
-                        </td>
-                    </tr>
-                <?php } } ?>
+                        <tr>
+                            <td><?= $item["ID_PRODUCTO"] ?></td>
+                            <td>
+                                <img src="<?= $rutaImagen ?>" class="img-producto img-miniatura" alt="Producto">
+                            </td>
+                            <td><strong><?= htmlspecialchars($item["NOMBRE"]) ?></strong></td>
+                            <td>₡<?= number_format($item["PRECIO"], 2, ',', '.') ?></td>
+                            <td>
+                                <span class="badge <?= $item["CANTIDAD"] > 5 ? 'bg-success' : 'bg-danger' ?>">
+                                    <?= $item["CANTIDAD"] ?> uds
+                                </span>
+                            </td>
+                        </tr>
+                <?php }
+                } ?>
             </tbody>
         </table>
 
