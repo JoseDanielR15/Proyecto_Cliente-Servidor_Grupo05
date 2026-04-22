@@ -3,7 +3,7 @@ include_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Vie
 include_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Controllers/cFacturas.php";
 
 // Solo admin puede acceder
-if ($_SESSION["ROL"] !== "Admin") {
+if ($_SESSION["ROL"] !== "Administrador") {
     header("Location: /Proyecto_Cliente-Servidor_Grupo05/Views/vInicio/Inicio.php");
     exit;
 }

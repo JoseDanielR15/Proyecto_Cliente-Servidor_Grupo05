@@ -39,6 +39,12 @@ function MostrarCSS()
 <link rel="stylesheet" href="/Proyecto_Cliente-Servidor_Grupo05/assets/css/auth.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/util.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/main.css">
+<style>
+.icon-header-noti::after {
+    background-color: #dc3545 !important;
+    border-radius: 50%;
+}
+</style>
 
 ';
 }
@@ -176,17 +182,38 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Con
                         </li>
 
                         <li>
+                            <a href="../vFacturas/vMisFacturas.php"> Ordenes</a>
+                        </li>
+
+                        <li>
                             <a href="../vInicio/acercaDe.php">Acerca de</a>
                         </li>
 
                         <li>
                             <a href="../vInicio/contacto.php">Contacto</a>
                         </li>';
-                        if (isset($rolUsuario) && $rolUsuario === "Administrador") { 
-                            echo ' <li>
-                                <a href="../vEstadisticas/estadisticas.php">|   Estadísticas</a>
+
+                        if (isset($rolUsuario) && $rolUsuario === "Administrador") {
+                            echo '
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark fw-bold" href="#"
+                                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Admin
+                                </a>
+                                <ul class="dropdown-menu shadow border-0">
+                                    <li>
+                                        <a class="dropdown-item py-2" href="../vEstadisticas/estadisticas.php">
+                                            <i class="fa fa-bar-chart" style="margin-right:8px;"></i>Estadísticas
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item py-2" href="../vFacturas/vAdminFacturas.php">
+                                            <i class="fa fa-file-text" style="margin-right:8px;"></i>Facturas
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>';
-                         }
+                        }
                 echo '
                     </ul>
                 </div>
@@ -198,9 +225,13 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Con
                         <i class="zmdi zmdi-search"></i>
                     </div>
 
-                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart">
+';
+    $__qty = $_SESSION["TotalCantidad"] ?? 0;
+    echo '<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
+                         data-notify="' . ($__qty > 0 ? $__qty : '') . '">
                         <i class="zmdi zmdi-shopping-cart"></i>
-                    </div>
+                    </div>';
+    echo '
 
                 </div>
 
@@ -210,6 +241,39 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Con
     </div>
 
 </header>
+
+<!-- ================= CART SIDEBAR ================= -->
+<div class="wrap-header-cart js-panel-cart">
+    <div class="s-full js-hide-cart"></div>
+    <div class="header-cart flex-col-l p-l-65 p-r-25">
+        <div class="header-cart-title flex-w flex-sb-m p-b-8">
+            <span class="mtext-103 cl2">Tu Carrito</span>
+            <div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+                <i class="zmdi zmdi-close"></i>
+            </div>
+        </div>
+        <div class="header-cart-content flex-col-l">';
+
+    // Contenido dinámico del carrito
+    if (isset($_SESSION["TotalCantidad"]) && $_SESSION["TotalCantidad"] > 0) {
+        echo '
+            <p class="stext-102 p-b-10">
+                ' . $_SESSION["TotalCantidad"] . ' artículo(s) &mdash;
+                ₡' . number_format($_SESSION["TotalPago"], 2) . '
+            </p>
+            <a href="/Proyecto_Cliente-Servidor_Grupo05/Views/vCarrito/carrito.php"
+               class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+                Ver Carrito
+            </a>';
+    } else {
+        echo '<p class="stext-102">Tu carrito está vacío.</p>';
+    }
+
+    echo '
+        </div>
+    </div>
+</div>
+
 ';
 }
 

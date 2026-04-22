@@ -1,6 +1,15 @@
 <?php
 include_once "../layout.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Controllers/cProductos.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Controllers/cCarrito.php"; // ← AGREGADO
+
+if (session_status() === PHP_SESSION_NONE) { // ← AGREGADO
+    session_start();
+}
+
+if (isset($_SESSION["Consecutivo"])) { // ← AGREGADO
+    ActualizarResumenCarrito();
+}
 ?>
 
 <!DOCTYPE html>
@@ -8,11 +17,14 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Con
 
 <?php MostrarHead(); ?>
 
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <body class="animsition">
 
     <?php MostrarHeader(); ?>
 
-    <div class="container mt-5">
+    <div class="container mt-5 mb-5">
 
         <?php
             $idCategoria = $_GET['id_cat'] ?? 0;
@@ -62,26 +74,88 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/Proyecto_Cliente-Servidor_Grupo05/Con
                 echo    '</div>';
                 echo '</div>';
 
-                // Botones
-                if (!$agotado) {
+                // ── Botones ── CORREGIDO: diferencia sesión iniciada / no iniciada / agotado
+                if (!$agotado && isset($_SESSION["Consecutivo"])) {
                     echo '<div class="d-flex align-items-center gap-2 p-t-10">';
                     echo    '<div class="input-group" style="max-width:120px;">';
-                    echo        '<button class="btn btn-outline-secondary btn-sm" onclick="cambiarCantidad(' . $idProducto . ', -1)">−</button>';
-                    echo        '<input type="text" id="cantidad_' . $idProducto . '" class="form-control text-center" value="1">';
-                    echo        '<button class="btn btn-outline-secondary btn-sm" onclick="cambiarCantidad(' . $idProducto . ', 1)">+</button>';
+                    echo        '<button class="btn btn-outline-secondary btn-sm" type="button" onclick="cambiarCantidad(' . $idProducto . ', -1)">−</button>';
+                    echo        '<input type="text" id="cantidad_' . $idProducto . '" class="form-control form-control-sm text-center" value="1" maxlength="3" onkeypress="return soloNumeros(event)">';
+                    echo        '<button class="btn btn-outline-secondary btn-sm" type="button" onclick="cambiarCantidad(' . $idProducto . ', 1)">+</button>';
                     echo    '</div>';
-                    echo    '<button class="btn btn-dark btn-sm w-100" onclick="AgregarProductoCarrito(' . $idProducto . ', ' . $stock . ')">Agregar</button>';
+                    echo    '<button class="btn btn-dark btn-sm flex-grow-1" onclick="AgregarProductoCarrito(' . $idProducto . ', ' . $stock . ')">';
+                    echo        '<i class="fa fa-shopping-cart"></i> Agregar';
+                    echo    '</button>';
+                    echo '</div>';
+                } elseif ($agotado) {
+                    echo '<div class="p-t-10">';
+                    echo    '<button class="btn btn-secondary btn-sm w-100" disabled>Sin stock</button>';
                     echo '</div>';
                 } else {
-                    echo '<button class="btn btn-secondary btn-sm w-100 mt-2" disabled>Sin stock</button>';
+                    // Usuario no logueado ← AGREGADO
+                    echo '<div class="p-t-10">';
+                    echo    '<a href="/Proyecto_Cliente-Servidor_Grupo05/Views/vSesion/sesion.php" class="btn btn-outline-dark btn-sm w-100">Inicia sesión para comprar</a>';
+                    echo '</div>';
                 }
 
-                echo '</div>';
-                echo '</div>';
+                echo '</div>'; // .block2
+                echo '</div>'; // .col
             }
             ?>
             </div>
 
     </div>
 
-<?php MostrarFooter(); ?>
+    <?php MostrarFooter(); ?>
+
+    <!-- ================= JS CARRITO ================= --> <!-- ← AGREGADO -->
+    <script>
+        function soloNumeros(event) {
+            return event.charCode >= 48 && event.charCode <= 57;
+        }
+
+        function cambiarCantidad(idProducto, delta) {
+            const input = document.getElementById("cantidad_" + idProducto);
+            let valor = parseInt(input.value) || 1;
+            valor += delta;
+            if (valor < 1) valor = 1;
+            input.value = valor;
+        }
+
+        function AgregarProductoCarrito(idProducto, stockDisponible) {
+            const input    = document.getElementById("cantidad_" + idProducto);
+            const cantidad = parseInt(input.value) || 1;
+
+            if (cantidad > stockDisponible) {
+                Swal.fire('Stock insuficiente', 'La cantidad supera el stock disponible (' + stockDisponible + ' unidades).', 'warning');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("IdProducto", idProducto);
+            formData.append("Cantidad", cantidad);
+            formData.append("btnAgregarProductoCarrito", "1");
+
+            fetch("/Proyecto_Cliente-Servidor_Grupo05/Controllers/cCarrito.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                Swal.fire({
+                    title: '¡Listo!',
+                    text: data,
+                    icon: 'success',
+                    timer: 1500,
+                    showConfirmButton: false
+                }).then(() => {
+                    location.reload();
+                });
+            })
+            .catch(() => {
+                Swal.fire('Error', 'No se pudo comunicar con el servidor.', 'error');
+            });
+        }
+    </script>
+
+</body>
+</html>

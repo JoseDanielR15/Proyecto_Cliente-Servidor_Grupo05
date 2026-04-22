@@ -22,46 +22,7 @@ $productos = ConsultarProductosController();
 <body class="animsition">
 
     <?php MostrarHeader(); ?>
-
-    <!-- ================= CART SIDEBAR ================= -->
-    <div class="wrap-header-cart js-panel-cart">
-        <div class="s-full js-hide-cart"></div>
-        <div class="header-cart flex-col-l p-l-65 p-r-25">
-            <div class="header-cart-title flex-w flex-sb-m p-b-8">
-                <span class="mtext-103 cl2">Tu Carrito</span>
-                <div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
-                    <i class="zmdi zmdi-close"></i>
-                </div>
-            </div>
-            <div class="header-cart-content flex-col-l">
-                <?php if (isset($_SESSION["TotalCantidad"]) && $_SESSION["TotalCantidad"] > 0): ?>
-                    <p class="stext-102 p-b-10">
-                        <?php echo $_SESSION["TotalCantidad"]; ?> artículo(s) &mdash;
-                        ₡<?php echo number_format($_SESSION["TotalPago"], 2); ?>
-                    </p>
-                    <a href="/Proyecto_Cliente-Servidor_Grupo05/Views/vCarrito/carrito.php"
-                       class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-                        Ver Carrito
-                    </a>
-                <?php else: ?>
-                    <p class="stext-102">Tu carrito está vacío.</p>
-                <?php endif; ?>
-            </div>
-        </div>
-    </div>
-
-    <!-- ================= SEARCH MODAL ================= -->
-    <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
-        <div class="container-search-header">
-            <button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
-                <i class="zmdi zmdi-close"></i>
-            </button>
-            <form class="wrap-search-header flex-w">
-                <button class="flex-c-m trans-04"><i class="zmdi zmdi-search"></i></button>
-                <input class="plh3" type="text" placeholder="Buscar productos...">
-            </form>
-        </div>
-    </div>
+    <!-- El sidebar del carrito y el search modal ya vienen del layout -->
 
     <!-- ================= SLIDER ================= -->
     <div class="container d-flex justify-content-center my-4">
@@ -97,8 +58,6 @@ $productos = ConsultarProductosController();
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
     <!-- ================= PRODUCTOS ================= -->
     <div class="sec-product bg0 p-t-100 p-b-50">
         <div class="container">
@@ -118,7 +77,6 @@ $productos = ConsultarProductosController();
                         echo '<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item">';
                         echo    '<div class="block2" style="position:relative;">';
 
-                        // Badge agotado
                         if ($agotado) {
                             echo '<div style="position:absolute; top:10px; left:10px; z-index:10;
                                              background:#dc3545; color:#fff; font-size:0.8rem;
@@ -127,10 +85,9 @@ $productos = ConsultarProductosController();
                                   </div>';
                         }
 
-                        echo '<div class="block2-pic hov-img0" style="height: 250px; display: flex; align-items: center; justify-content: center; background-color: #f8f9fa; ' . ($agotado ? 'opacity:0.5;' : '') . '">';
+                        echo '<div class="block2-pic hov-img0" style="height:250px; display:flex; align-items:center; justify-content:center; background-color:#f8f9fa; ' . ($agotado ? 'opacity:0.5;' : '') . '">';
 
                         if (!empty($producto['IMAGEN'])) {
-                            
                             $rutaImagen = "/Proyecto_Cliente-Servidor_Grupo05/" . htmlspecialchars($producto['IMAGEN']);
                             echo '<img src="' . $rutaImagen . '" alt="' . htmlspecialchars($producto['NOMBRE']) . '" class="img-fit">';
                         } else {
@@ -144,9 +101,9 @@ $productos = ConsultarProductosController();
                         echo            '<span class="stext-105 cl3">₡' . number_format($producto['PRECIO'], 2, ',', '.') . '</span>';
 
                         if ($agotado) {
-                            echo    '<span style="color:#dc3545; font-size:0.85rem; font-weight:600;">Sin stock disponible</span>';
+                            echo '<span style="color:#dc3545; font-size:0.85rem; font-weight:600;">Sin stock disponible</span>';
                         } else {
-                            echo    '<span class="stext-102 cl3">Stock: ' . $stock . '</span>';
+                            echo '<span class="stext-102 cl3">Stock: ' . $stock . '</span>';
                         }
 
                         echo        '</div>';
@@ -158,7 +115,6 @@ $productos = ConsultarProductosController();
                         echo        '</div>';
                         echo    '</div>';
 
-                        // Botones de carrito
                         if (!$agotado && isset($_SESSION["Consecutivo"])) {
                             echo '<div class="d-flex align-items-center gap-2 p-t-10">';
                             echo    '<div class="input-group" style="max-width:120px;">';
@@ -200,10 +156,10 @@ $productos = ConsultarProductosController();
                 <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
                     <div class="block1 wrap-pic-w">
                         <img src='../assets/images/Monitores.jpg' alt="IMG-BANNER">
-                        <a href="/Proyecto_Cliente-Servidor_Grupo05/Views/vProductos/vProductosXCategoria.php?id_cat=4" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+                        <a href="/Proyecto_Cliente-Servidor_Grupo05/Views/vProductos/vProductosXCategoria.php?id_cat=4"
+                           class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                             <div class="block1-txt-child1 flex-col-l">
                                 <span class="block1-name ltext-102 trans-04 p-b-8">Monitores</span>
-                                <span class="block1-info stext-102 trans-04"></span>
                             </div>
                             <div class="block1-txt-child2 p-b-4 trans-05">
                                 <div class="block1-link stext-101 cl0 trans-09">Ver Monitores</div>
@@ -212,13 +168,10 @@ $productos = ConsultarProductosController();
                     </div>
                 </div>
                 <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
-                    <div class="block1 wrap-pic-w" style='width: 88%;'>
+                    <div class="block1 wrap-pic-w" style='width:88%;'>
                         <img src='../assets/images/Ofertas.jpg' alt="IMG-BANNER">
-                        <a href="/Proyecto_Cliente-Servidor_Grupo05/Views/vProductos/vProductosXCategoria.php?id_cat=1" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-                            <div class="block1-txt-child1 flex-col-l">
-                                <span class="block1-name ltext-102 trans-04 p-b-8"></span>
-                                <span class="block1-info stext-102 trans-04"></span>
-                            </div>
+                        <a href="/Proyecto_Cliente-Servidor_Grupo05/Views/vProductos/vProductosXCategoria.php?id_cat=1"
+                           class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                             <div class="block1-txt-child2 p-b-4 trans-05">
                                 <div class="block1-link stext-101 cl0 trans-09">Ver Ofertas</div>
                             </div>
@@ -228,17 +181,17 @@ $productos = ConsultarProductosController();
                 <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
                     <div class="block1 wrap-pic-w">
                         <img src='../assets/images/Mouse.jpg' alt="IMG-BANNER">
-                        <a href="/Proyecto_Cliente-Servidor_Grupo05/Views/vProductos/vProductosXCategoria.php?id_cat=3" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+                        <a href="/Proyecto_Cliente-Servidor_Grupo05/Views/vProductos/vProductosXCategoria.php?id_cat=3"
+                           class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                             <div class="block1-txt-child1 flex-col-l">
                                 <span class="block1-name ltext-102 trans-04 p-b-8">Perifericos</span>
-                                <span class="block1-info stext-102 trans-04"></span>
                             </div>
                             <div class="block1-txt-child2 p-b-4 trans-05">
                                 <div class="block1-link stext-101 cl0 trans-09">Ver</div>
                             </div>
                         </a>
                     </div>
-                </div>  
+                </div>
             </div>
         </div>
     </div>
